@@ -9,8 +9,10 @@ class Propeller {
  */
 private:
 	
-	uint8	m_iNumBlades;
+	uint8		m_iNumBlades;
 	vec		m_flBladeRadius;
+	joules		m_currentEnergy;
+	newtons		m_propStrength;
 
 	//TODO - add member variables needed for physics-based model of propeller
 /*
@@ -29,5 +31,9 @@ public:
 	 * 
 	 */
 	newtons getPropulsionStrength();
+	/**
+	 * Models the decay of energy over time
+	 */
+	void think();
 
 };

@@ -11,7 +11,7 @@ private:
 	float m_flFuelCurrent; //current amount of fuel in the tank
 	float m_flFuelCapacity; //capacity of the tank
 
-	ftime m_tLastFuelConsumptionTime;
+	ftime m_tLastFuelConsumptionTime; //The last frame that fuel was consumed on
 	float m_flLastFuelAmountConsumed; //how much fuel has been consumed on this frame?
 /*
  * Public members
@@ -35,7 +35,7 @@ public:
 	/**
 	 * Given an amount of fuel, checks if that amount can be consumed.
 	 * @param flAmount - the amount of fuel to check
-	 * @return flAmount > getFuelCurrent()
+	 * @return flAmount < getFuelCurrent()
 	 */
 	bool canConsumeFuel(const float flAmount) const;
 
@@ -53,4 +53,9 @@ public:
 	 * @return the fuel consumption rate, in units/s.
 	 */
 	float getFuelConsumptionRate() const;
+
+	/**
+	* @return flDensity
+	*/
+	float getFuelDensity() const;
 };

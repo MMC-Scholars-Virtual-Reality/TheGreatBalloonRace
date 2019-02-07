@@ -9,9 +9,9 @@ class Propeller {
  */
 private:
 	
-	uint8		m_iNumBlades;
-	vec			m_flBladeRadius;
-	newtons		m_propStrength;
+	uint8		m_iNumBlades; //number of blades on the propeller
+	vec		m_flBladeRadius; //the radius of the blade on the propeller
+	newtons		m_propStrength; //the strength of the propulsion/thrust of the propeller
 
 	//TODO - add member variables needed for physics-based model of propeller
 /*

@@ -27,8 +27,8 @@ private:
 	ABaseEntity* m_rudderPropellerDirection;
 
 	//Settings set by in-world throttels
-	lerp m_flMainThrottel; //0-1 scale
-	lerp m_flRudderThrottel; //0-1 scale
+	lerp m_lMainThrottel; //0-1 scale
+	lerp m_lRudderThrottel; //0-1 scale
 
 	//Engine state variables
 	constexpr static uint8 NUM_GEARS = 4;
@@ -53,6 +53,8 @@ private:
  * Public functions
  */
 public:
+
+	void setThrottel(float _flThrottel, EThrottel eThottel);
 
 
 

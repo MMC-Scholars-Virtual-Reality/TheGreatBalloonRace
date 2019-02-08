@@ -1,7 +1,7 @@
 #pragma once
 
 #include "predefs.h"
-#include "VRBase\System\predefs.h"
+#include "VRBase/System/predefs.h"
 
 class Propeller {
 /*

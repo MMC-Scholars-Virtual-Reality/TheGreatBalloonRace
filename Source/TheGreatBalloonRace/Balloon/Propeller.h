@@ -10,7 +10,7 @@ class Propeller {
 private:
 	
 	uint8		m_iNumBlades; //number of blades on the propeller
-	vec		m_flBladeRadius; //the radius of the blade on the propeller
+	vec			m_flBladeRadius; //the radius of the blade on the propeller
 	newtons		m_propStrength; //the strength of the propulsion/thrust of the propeller
 	double 		m_area; //surface area of the propeller disk, looking at it from the front(circle)
 	double		m_rotationalVelo; //revolutions per second of the propeller

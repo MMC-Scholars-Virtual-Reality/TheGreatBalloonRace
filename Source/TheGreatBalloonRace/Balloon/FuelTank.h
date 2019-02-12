@@ -58,4 +58,11 @@ public:
 	* @return flDensity
 	*/
 	float getFuelDensity() const;
+
+	/**
+	* Given an amount of fuel, adds that amount to the tank
+	* @param reflAmount - the amount of fuel to add
+	* @requires reflAmount < (_flFuelCapacity - getFuelCurrent)
+	*/
+	void refuel(const float reflAmount);
 };

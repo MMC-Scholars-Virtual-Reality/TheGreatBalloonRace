@@ -5,6 +5,7 @@ typedef float newtons;
 typedef float liters;
 typedef float meters;
 typedef float kelvin;
+typedef float atmos;
 #define min(a, b) ((a) < (b) ? a : b)
 #define sqr(a) ((a)*(a))
 

@@ -4,6 +4,7 @@
 
 FuelTank::FuelTank(const float _flFuelCapacity) {
 	m_flFuelCapacity = _flFuelCapacity;
+	m_flFuelCurrent = _flFuelCapacity;
 }
 
 void FuelTank::consumeFuel(const float flAmount) {
@@ -34,4 +35,8 @@ float FuelTank::getFuelConsumptionRate() const {
 float FuelTank::getFuelDensity() const {
 	float flDensity = log(getFillRatio()*10 + 1);
 	return min(flDensity, 1);
+}
+
+void FuelTank::refuel(const float reflAmount) {
+	m_flFuelCapacity += reflAmount;
 }

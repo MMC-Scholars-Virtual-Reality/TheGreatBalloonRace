@@ -1,7 +1,10 @@
 #pragma once
+#include "predefs.h"
 
 namespace Atmosphere {
 
-	extern 
+	atmos getAirPressureAtAltitude(meters m);
+
+	kelvin getAirTemperatureAtAltitude(kelvin k);
 
 }

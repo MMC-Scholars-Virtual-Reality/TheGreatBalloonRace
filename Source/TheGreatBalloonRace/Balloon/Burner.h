@@ -7,11 +7,22 @@
 class Burner {
 
 	class AirVolume {
-		
+
+	private:
 		liters m_volume;
 		kelvin m_temperature;
+		joules m_currentEnergy;
+		meters m_radius;
 
+	public:
+		AirVolume(const float _AirVolume, const float _BalloonRadius);
 
-	} m_airState;
+		void addEnergy(const joules heat);
+
+		void transferHeatTo(meters area, kelvin outsideTemp, AirVolume* pOtherVolume = nullptr);
+
+	} m_bottomState, m_topState;
+
+	void stopApplyingHeat();
 
 };

@@ -9,14 +9,18 @@ void Propeller::addEnergy(joules jEnergy)
 //forces and parameters we can actually control
 newtons Propeller::getPropulsionStrength()
 {
-	double density = 1.225; //air density
+	double density; //air density
 	double area = 0; //area of the propeller disk
 	double exitV = 0; //the velocity of the air leaving the propeller
 	double aircraftV = 0; //the velocity of the aircraft
+	double c = 0; //some constant to be set later
+
 	//torque = rotational velocity^2, does not account for the other forces(blade pitch, etc)
-	//F = 4.392399x10^-8 * RPM diameter(in inches)^(3.5)/(sqrt(pitch(in inches)) * (4.23333x10^-4) * RPM * pitch(in inches) - V0(propeller forward airspeed)
-	//static thrust if V0 = 0
-	m_nPropStrength = .50 * density * area * (sqr(exitV) - sqr(aircraftV));
+	//final dynamic thrust F = 4.392399x10^-8 * RPM diameter(in inches)^(3.5)/(sqrt(pitch(in inches)) * (4.23333x10^-4) * RPM * pitch(in inches) - V0(velocity of hot air balloon + wind velocity)
+	//final static thrust F = 1.225((pi(.0254 * d)^2)/4 * (RPM * 0.0245 * pitch(in inches) * 1min/60sec)^2 * (d/3.29546)^1.5
+	
+	m_nPropStrength = m_dRotationalVelo * c;
+	//m_nPropStrength = .50 * density * area * (sqr(exitV) - sqr(aircraftV));
 	return m_nPropStrength;
 }
 //calculate rotational velocity based on energy, time, mass, and drag

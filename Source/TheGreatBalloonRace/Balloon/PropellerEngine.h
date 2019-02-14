@@ -27,13 +27,15 @@ private:
 	ABaseEntity* m_rudderPropellerDirection;
 
 	//Settings set by in-world throttels
-	lerp m_lMainThrottel; //0-1 scale
-	lerp m_lRudderThrottel; //0-1 scale
+	lerp m_lMainThrottle; //0-1 scale
+	lerp m_lRudderThrottle; //0-1 scale
 
 	//Engine state variables
 	constexpr static uint8 NUM_GEARS = 4;
+	const static uint8 RPMperGear = 1000;
 	uint8 m_iCurrentGear;
 	uint16 m_iRPM;
+	
 
 	//Engine sound
 	USoundCue* m_pEngineSound;
@@ -47,15 +49,22 @@ private:
 	 * Ensures that the engine sound is currently being played with the correct parameters.
 	 */
 	void playEngineSound();
-
-
+	void checkGearChange(uint8 m_iCurrentGear);
+	uint16 getGearIndepRPM();
+	uint16 setByGearIndepRPM(uint16 indepRPM);
 /**
  * Public functions
  */
 public:
 
-	void setThrottel(float _flThrottel, EThrottel eThottel);
+	void setThrottle(lerp _flThrottle, EThrottle eThrottle);
 
+	void setSoundCue(USoundCue* sound) { m_pEngineSound = sound; }
 
+	void think();
 
+	void setRPM(uint16 RPM);
+
+	void setGear(uint8 RPM);
+	
 };

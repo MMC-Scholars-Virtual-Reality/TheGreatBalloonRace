@@ -5,6 +5,9 @@ namespace Atmosphere {
 
 	atmos getAirPressureAtAltitude(meters m);
 
-	kelvin getAirTemperatureAtAltitude(kelvin k);
+	kelvin getAirTemperatureAtAltitude(meters m);
 
+	density getAirDensityAtAltitude(meters m);
+
+	therm_cond getThermalConductivityOfAir(kelvin k);
 }

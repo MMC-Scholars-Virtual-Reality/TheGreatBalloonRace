@@ -38,5 +38,5 @@ float FuelTank::getFuelDensity() const {
 }
 
 void FuelTank::refuel(const float reflAmount) {
-	m_flFuelCapacity += reflAmount;
+	m_flFuelCurrent += reflAmount;
 }

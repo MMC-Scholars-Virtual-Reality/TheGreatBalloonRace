@@ -4,8 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "VRBase/ABaseEntity/ABaseEntity.h"
-#include "DropTarget.generated.h"
 #include "Components/StaticMeshComponent.h"
+#include "DropTarget.generated.h"
 
 /**
  * 

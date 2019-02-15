@@ -9,7 +9,7 @@ void Propeller::addEnergy(joules jEnergy)
 //forces and parameters we can actually control
 newtons Propeller::getPropulsionStrength()
 {
-	double density; //air density
+	//double density; //air density
 	double area = 0; //area of the propeller disk
 	double exitV = 0; //the velocity of the air leaving the propeller
 	double aircraftV = 0; //the velocity of the aircraft

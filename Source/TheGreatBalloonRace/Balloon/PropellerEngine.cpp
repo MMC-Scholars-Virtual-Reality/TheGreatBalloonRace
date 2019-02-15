@@ -21,22 +21,22 @@ uint16 PropellerEngine::getGearIndepRPM() {
 	return RPMperGear * (m_iCurrentGear - 1) + RPMRange;
 }
 //does the opposite of the getGearIndepRPM function
-uint16 PropellerEngine::setByGearIndepRPM(uint16 indepRPM) {
-	uint16 newRPM = indepRPM - (500 * (m_iCurrentGear - 1));
+void PropellerEngine::setByGearIndepRPM(uint16 indepRPM) {
+	//uint16 newRPM = indepRPM - (500 * (m_iCurrentGear - 1));
+
 }
 
 void PropellerEngine::think(){
 
-	uint8 maxRPMPerGear;
 	lerp totalThrottle = m_lMainThrottle + m_lRudderThrottle;
 	if (totalThrottle > 1) {
 		totalThrottle = 1;
 	}
 	uint16 wishRPM = totalThrottle * 3000;
 	
+	float fuelToConsume = 0.01f * m_pFuelTank->getFuelDensity();
 
-
-	if (m_pFuelTank->canConsumeFuel()){
+	if (m_pFuelTank->canConsumeFuel(fuelToConsume)){
 
 	}
 }

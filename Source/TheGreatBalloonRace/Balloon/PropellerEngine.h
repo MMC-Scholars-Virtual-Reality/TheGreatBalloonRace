@@ -32,7 +32,7 @@ private:
 
 	//Engine state variables
 	constexpr static uint8 NUM_GEARS = 4;
-	const static uint8 RPMperGear = 1000;
+	constexpr static uint16 RPMperGear = 1000;
 	uint8 m_iCurrentGear;
 	uint16 m_iRPM;
 	
@@ -51,7 +51,7 @@ private:
 	void playEngineSound();
 	void checkGearChange(uint8 m_iCurrentGear);
 	uint16 getGearIndepRPM();
-	uint16 setByGearIndepRPM(uint16 indepRPM);
+	void setByGearIndepRPM(uint16 indepRPM);
 /**
  * Public functions
  */

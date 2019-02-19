@@ -11,6 +11,7 @@ typedef float therm_cond;
 #define min(a, b) ((a) < (b) ? a : b)
 #define sqr(a) ((a)*(a))
 #define gravity 9.81
+#define BOLTZMANN_CONSTANT  (1.38064852e-23f)
 
 enum EThrottle : unsigned char {
 	THROTTLE_MAIN,

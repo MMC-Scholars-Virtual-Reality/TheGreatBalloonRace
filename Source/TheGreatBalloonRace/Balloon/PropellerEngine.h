@@ -40,6 +40,9 @@ private:
 	//Engine sound
 	USoundCue* m_pEngineSound;
 
+	//Engine on or off
+	bool m_bIsOn = NULL;
+
 /**	
  * Private member helper functions
  */

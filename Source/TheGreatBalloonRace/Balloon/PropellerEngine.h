@@ -51,7 +51,7 @@ private:
 	bool m_bIsOn = NULL;
 
 	//amount of fuel to consume
-	float m_fFuelToConsume = 0.01f * m_pFuelTank->getFuelDensity();
+	//float m_fFuelToConsume = 0.01f * m_pFuelTank->getFuelDensity();
 
 /**	
  * Private member helper functions

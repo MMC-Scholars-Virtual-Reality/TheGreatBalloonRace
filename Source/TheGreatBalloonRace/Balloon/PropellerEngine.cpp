@@ -5,9 +5,9 @@
 #include "FuelTank.h"
 
 PropellerEngine::PropellerEngine() {
-	m_pEngineSoundComponent = CreateDefaultSubobject<UAudioComponent>("Engine Sound Component");
+	//m_pEngineSoundComponent = CreateDefaultSubobject<UAudioComponent>("Engine Sound Component");
 
-	if (m_pEngineSound) m_pEngineSoundComponent->SetSound(m_pEngineSound);
+	//if (m_pEngineSound) m_pEngineSoundComponent->SetSound(m_pEngineSound);
 }
 
 void PropellerEngine::playEngineSound() {
@@ -49,16 +49,17 @@ void PropellerEngine::think() {
 
 
 	//checks if there is enough fuel to consume and if so, consumes it
-	if (m_pFuelTank->canConsumeFuel(m_fFuelToConsume)) {
+	/*if (m_pFuelTank->canConsumeFuel(m_fFuelToConsume)) {
 		m_pFuelTank->consumeFuel(m_fFuelToConsume);
 		m_mainPropeller->addEnergy(getWork(m_fFuelToConsume)); //add energy to the main propeller, 
-	}
+	}*/
 }
 //finds the amount of work performed by the amount of fuel consumed
-joules getWork(float m_fFuelToConsume){
+joules PropellerEngine::getWork(float m_fFuelToConsume){
 	//.5 * moment of inertia * angular velocity^2
-	joules work = .5 * m_mainPropeller->m_nInertia * sqr(m_mainPropeller->m_dRotationalVelo);
-	return work;
+	//joules work = .5 * m_mainPropeller.m_nInertia * sqr(m_mainPropeller.m_dRotationalVelo);
+	//return work;
+	return 0;
 }
 void PropellerEngine::setRPM(uint16 RPM) {
 	m_iRPM = RPM;

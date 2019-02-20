@@ -23,7 +23,7 @@ private:
 	*/
 public:
 	joules		m_jCurrentEnergy = 0; //the current energy being given to the propellers
-	newtons		m_nInertia = 0; //the rotational inertia of the propeller
+	newtons		m_nInertia = 0; //the moment of inertia of the propeller
 	/*
 	* Adds energy to be converted into rotational energy of the propeller.
 	*/

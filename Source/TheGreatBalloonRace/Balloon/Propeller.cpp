@@ -30,6 +30,7 @@ void Propeller::think()
 	m_nInertia = m_iNumBlades * (1 / 12.0) * m_dMass * sqr(2 * m_flBladeRadius);
 	//USE IF NUMBLADES IS ODD - inertia = 1/3 * m_mass * sqr(r);
 	m_dRotationalVelo = (2 * m_jCurrentEnergy) / m_nInertia;
+
 	/*
 	v = tangential speed = rotational speed * r, r = radial distance
 	Rotational Kinetic energy = .5 * rotational Inertia * rotSpeed

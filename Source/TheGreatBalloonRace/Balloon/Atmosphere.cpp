@@ -1,24 +1,30 @@
-
 #include "Atmosphere.h"
 #include "predefs.h"
-
+#include <cmath>
 
 namespace Atmosphere {
 
+	static kelvin g_surfaceTemp = 287; //Surface temperature is 287 by default
+
 	atmos getAirPressureAtAltitude(meters m) {
-		return 0;
+		return pow(euler, (-MOLAR_MASS_AIR * gravity * m) / (UNI_GAS_CONST * getAirTemperatureAtAltitude(m)));
 	}
 
 	kelvin getAirTemperatureAtAltitude(meters m) {
-		return 0;
+		return m * LAPSE_RATE + g_surfaceTemp;
 	}
 
 	density getAirDensityAtAltitude(meters m) {
-		return 0;
+		return getAirPressureAtAltitude(m) / (SP_GAS_CONST_AIR * getAirTemperatureAtAltitude(m));
 	}
 
 	therm_cond getThermalConductivityOfAir(kelvin k) {
-		return 0;
+		float celsius = k - 273;
+		return celsius * THERM_COND_AIR_RATE + THERM_COND_AIR_AT_ZERO_CELSIUS;
+	}
+
+	void setSurfaceTemperature(kelvin k) {
+		g_surfaceTemp = k;
 	}
 
 }

@@ -14,7 +14,6 @@ private:
 	double		m_dBladePitch; //the pitch of the blade
 	newtons		m_nPropStrength; //the strength of the propulsion/thrust of the propeller
 	double 		m_dArea; //surface area of the propeller disk, looking at it from the front(circle)
-	double		m_dRotationalVelo; //revolutions per second of the propeller
 	double 		m_dMass; //mass of the propeller
 
 	//TODO - add member variables needed for physics-based model of propeller
@@ -24,6 +23,7 @@ private:
 public:
 	joules		m_jCurrentEnergy = 0; //the current energy being given to the propellers
 	newtons		m_nInertia = 0; //the moment of inertia of the propeller
+	double		m_dRotationalVelo; //revolutions per second of the propeller
 	/*
 	* Adds energy to be converted into rotational energy of the propeller.
 	*/

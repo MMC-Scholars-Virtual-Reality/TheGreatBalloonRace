@@ -45,13 +45,11 @@ private:
 	
 	//Engine sound
 	USoundCue* m_pEngineSound;
-	UAudioComponent* m_pEngineSoundComponent;
 
 	//Engine on or off
 	bool m_bIsOn = NULL;
 
-	//amount of fuel to consume
-	//float m_fFuelToConsume = 0.01f * m_pFuelTank->getFuelDensity();
+	
 
 /**	
  * Private member helper functions
@@ -61,12 +59,13 @@ private:
 	/**
 	 * Ensures that the engine sound is currently being played with the correct parameters.
 	 */
+	//IN PROGRESS
 	void playEngineSound();
 
-	void checkGearChange(uint8 m_iCurrentGear);
 	//implemented
 	uint16 getGearIndepRPM();
 	
+	//implemented
 	void setByGearIndepRPM(uint16 indepRPM);
 /**
  * Public functions
@@ -74,16 +73,17 @@ private:
 public:
 	//implemented
 	void setThrottle(lerp _flThrottle, EThrottle eThrottle);
+	
 	//implemented
 	void setSoundCue(USoundCue* sound) { m_pEngineSound = sound; }
+	
 	//in progress
 	void think();
-	//implemented
-	void setRPM(uint16 RPM);
-	//implemented
-	void setGear(uint8 RPM);
-	
-	joules getWork(float m_fFuelToConsume);
 
+	//implemented
+	void setRPM(uint16 RPM) { m_iRPM = RPM; }
 	
+	//implemented
+	void setGear(uint8 gear) { m_iCurrentGear = gear; }
+		
 };

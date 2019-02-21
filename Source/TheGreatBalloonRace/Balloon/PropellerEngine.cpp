@@ -3,15 +3,18 @@
 #include "PropellerEngine.h"
 #include "predefs.h"
 #include "FuelTank.h"
+#include "AGameRules/AGameRules.h"
+#include "Kismet/GameplayStatics.h"
 
+//default constructor
 PropellerEngine::PropellerEngine() {
 	//m_pEngineSoundComponent = CreateDefaultSubobject<UAudioComponent>("Engine Sound Component");
 
 	//if (m_pEngineSound) m_pEngineSoundComponent->SetSound(m_pEngineSound);
 }
-
+//play sound depending on what gear the engine is in
 void PropellerEngine::playEngineSound() {
-
+	//UGameplayStatics::PlaySoundAtLocation()
 
 }
 //chooses which throttle to set and then sets it based on the inputted value
@@ -19,10 +22,7 @@ void PropellerEngine::setThrottle(lerp _flThrottle, EThrottle eThrottle) {
 	lerp* plerpToSet = eThrottle == THROTTLE_MAIN ? &m_lMainThrottle : &m_lRudderThrottle;
 	*plerpToSet = _flThrottle;
 }
-void PropellerEngine::checkGearChange(uint8 m_iCurrentGear) {
 
-
-}
 //returns linear value for current RPM and current Gear
 uint16 PropellerEngine::getGearIndepRPM() {
 	uint16 RPMRange = (m_iRPM - (500 * (m_iCurrentGear - 1)));
@@ -32,8 +32,8 @@ uint16 PropellerEngine::getGearIndepRPM() {
 //correspond with the indepRPM linear value
 void PropellerEngine::setByGearIndepRPM(uint16 indepRPM) {
 	//uint16 newRPM = indepRPM - (500 * (m_iCurrentGear - 1));
-	uint16 newRPM = indepRPM - RPMperGear * (m_iCurrentGear - 1);
-	uint16 newGear = indepRPM / m_iRPM;
+	uint16 newGear = (indepRPM / RPMperGear) + 1;
+	uint16 newRPM = indepRPM - ((newGear-1) * RPMperGear) + 500 * (newGear - 1);
 	m_iRPM = newRPM;
 	m_iCurrentGear = newGear;
 }
@@ -47,23 +47,19 @@ void PropellerEngine::think() {
 	}
 	uint16 wishRPM = totalThrottle * 3000;
 
+	float fuelToConsume = 0.01f * m_pFuelTank->getFuelDensity();
 
 	//checks if there is enough fuel to consume and if so, consumes it
-	/*if (m_pFuelTank->canConsumeFuel(m_fFuelToConsume)) {
-		m_pFuelTank->consumeFuel(m_fFuelToConsume);
-		m_mainPropeller->addEnergy(getWork(m_fFuelToConsume)); //add energy to the main propeller, 
-	}*/
+	if (m_pFuelTank->canConsumeFuel(fuelToConsume)) {
+		
+		m_pFuelTank->consumeFuel(fuelToConsume);
+
+		float energy = fuelToConsume;
+		float energyMain = energy * m_lMainThrottle / (m_lMainThrottle + m_lRudderThrottle);
+		float energyRudder = energy - energyMain;
+
+		m_rudderPropeller.addEnergy(energyRudder); //add energy to the rudder propeller
+		m_mainPropeller.addEnergy(energyMain); //add energy to the main propeller
+	}
 }
-//finds the amount of work performed by the amount of fuel consumed
-joules PropellerEngine::getWork(float m_fFuelToConsume){
-	//.5 * moment of inertia * angular velocity^2
-	//joules work = .5 * m_mainPropeller.m_nInertia * sqr(m_mainPropeller.m_dRotationalVelo);
-	//return work;
-	return 0;
-}
-void PropellerEngine::setRPM(uint16 RPM) {
-	m_iRPM = RPM;
-}
-void PropellerEngine::setGear(uint8 gear) {
-	m_iCurrentGear = gear;
-}
+

@@ -32,6 +32,8 @@ private:
 	//Use the forward vectors of these as the directions of the propeller forces.
 	ABaseEntity* m_mainPropellerDirection;
 	ABaseEntity* m_rudderPropellerDirection;
+	ABaseEntity* m_pSoundLocation;
+
 
 	//Settings set by in-world throttels
 	lerp m_lMainThrottle; //0-1 scale
@@ -47,9 +49,7 @@ private:
 	USoundCue* m_pEngineSound;
 
 	//Engine on or off
-	bool m_bIsOn = NULL;
-
-	
+	bool m_bIsOn;
 
 /**	
  * Private member helper functions
@@ -59,7 +59,7 @@ private:
 	/**
 	 * Ensures that the engine sound is currently being played with the correct parameters.
 	 */
-	//IN PROGRESS
+	//implemented
 	void playEngineSound();
 
 	//implemented

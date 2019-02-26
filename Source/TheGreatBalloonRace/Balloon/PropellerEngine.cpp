@@ -4,18 +4,39 @@
 #include "predefs.h"
 #include "FuelTank.h"
 #include "AGameRules/AGameRules.h"
+#include "GameFramework/Actor.h"
 #include "Kismet/GameplayStatics.h"
+
 
 //default constructor
 PropellerEngine::PropellerEngine() {
-	//m_pEngineSoundComponent = CreateDefaultSubobject<UAudioComponent>("Engine Sound Component");
+	m_bIsOn = false;
+	m_pFuelTank = NULL;
+	m_mainPropellerDirection = NULL;
+	m_rudderPropellerDirection = NULL;
+	m_pSoundLocation = NULL;
+	m_pEngineSound = NULL;
 
-	//if (m_pEngineSound) m_pEngineSoundComponent->SetSound(m_pEngineSound);
+	
 }
 //play sound depending on what gear the engine is in
 void PropellerEngine::playEngineSound() {
-	//UGameplayStatics::PlaySoundAtLocation()
-
+	if (m_pSoundLocation)
+	{
+		if (m_iCurrentGear == 1) {
+			UGameplayStatics::PlaySoundAtLocation(m_pEngineSound, m_pEngineSound, m_pSoundLocation->GetActorLocation());
+		}
+		else if (m_iCurrentGear == 2) {
+			UGameplayStatics::PlaySoundAtLocation(m_pEngineSound, m_pEngineSound, m_pSoundLocation->GetActorLocation(), 1.5F, 1.5F);
+		}
+		else if (m_iCurrentGear == 3) {
+			UGameplayStatics::PlaySoundAtLocation(m_pEngineSound, m_pEngineSound, m_pSoundLocation->GetActorLocation(), 2.0F, 2.0F);
+		}
+		else if (m_iCurrentGear == 4) {
+			UGameplayStatics::PlaySoundAtLocation(m_pEngineSound, m_pEngineSound, m_pSoundLocation->GetActorLocation(), 2.5F, 2.5F);
+		}
+	}
+	
 }
 //chooses which throttle to set and then sets it based on the inputted value
 void PropellerEngine::setThrottle(lerp _flThrottle, EThrottle eThrottle) {
@@ -61,5 +82,12 @@ void PropellerEngine::think() {
 		m_rudderPropeller.addEnergy(energyRudder); //add energy to the rudder propeller
 		m_mainPropeller.addEnergy(energyMain); //add energy to the main propeller
 	}
+	//ask each propeller how much thrust they are providing, get direction from m_mainPropellerDirection and m_rudderPropellerDirection
+	//Once it has magnitude and direction, create force vector for each propeller and add them up to send to force accumulator
+	newtons mainThrust = m_mainPropeller.getPropulsionStrength();
+	newtons rudderThrust = m_rudderPropeller.getPropulsionStrength();
+	FVector mainDirection = m_mainPropellerDirection->GetActorForwardVector();
+	//continue workig on this to make the length of the direction vector equal to the magnitude of MainThrust/rudderThrust
+	//mainDirection.ToDirectionAndLength();
 }
 

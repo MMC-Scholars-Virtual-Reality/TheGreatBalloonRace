@@ -87,7 +87,8 @@ void PropellerEngine::think() {
 	newtons mainThrust = m_mainPropeller.getPropulsionStrength();
 	newtons rudderThrust = m_rudderPropeller.getPropulsionStrength();
 	FVector mainDirection = m_mainPropellerDirection->GetActorForwardVector();
-	//continue workig on this to make the length of the direction vector equal to the magnitude of MainThrust/rudderThrust
-	//mainDirection.ToDirectionAndLength();
+	FVector rudderDirection = m_rudderPropellerDirection->GetActorForwardVector();
+	//continue working on this to make the length of the direction vector equal to the magnitude of MainThrust/rudderThrust
+	 
 }
 

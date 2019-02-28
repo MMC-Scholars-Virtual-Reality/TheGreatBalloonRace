@@ -3,6 +3,7 @@
 #include "PropellerEngine.h"
 #include "predefs.h"
 #include "FuelTank.h"
+#include "ForceAccumulator.h"
 #include "AGameRules/AGameRules.h"
 #include "GameFramework/Actor.h"
 #include "Kismet/GameplayStatics.h"
@@ -10,18 +11,15 @@
 
 //default constructor
 PropellerEngine::PropellerEngine() {
-	m_bIsOn = false;
 	m_pFuelTank = NULL;
 	m_mainPropellerDirection = NULL;
 	m_rudderPropellerDirection = NULL;
 	m_pSoundLocation = NULL;
 	m_pEngineSound = NULL;
-
-	
 }
 //play sound depending on what gear the engine is in
 void PropellerEngine::playEngineSound() {
-	if (m_pSoundLocation)
+	if (m_pSoundLocation && m_iRPM != 0)
 	{
 		if (m_iCurrentGear == 1) {
 			UGameplayStatics::PlaySoundAtLocation(m_pEngineSound, m_pEngineSound, m_pSoundLocation->GetActorLocation());
@@ -36,7 +34,6 @@ void PropellerEngine::playEngineSound() {
 			UGameplayStatics::PlaySoundAtLocation(m_pEngineSound, m_pEngineSound, m_pSoundLocation->GetActorLocation(), 2.5F, 2.5F);
 		}
 	}
-	
 }
 //chooses which throttle to set and then sets it based on the inputted value
 void PropellerEngine::setThrottle(lerp _flThrottle, EThrottle eThrottle) {
@@ -60,35 +57,39 @@ void PropellerEngine::setByGearIndepRPM(uint16 indepRPM) {
 }
 
 //function that goes off every frame during the program
-void PropellerEngine::think() {
+void PropellerEngine::think(ForceAccumulator* pAccumulator) {
+		playEngineSound();
+		lerp totalThrottle = m_lMainThrottle + m_lRudderThrottle;
+		if (totalThrottle > 1) {
+			totalThrottle = 1;
+		}
+		uint16 wishRPM = totalThrottle * 3000;
 
-	lerp totalThrottle = m_lMainThrottle + m_lRudderThrottle;
-	if (totalThrottle > 1) {
-		totalThrottle = 1;
-	}
-	uint16 wishRPM = totalThrottle * 3000;
+		float fuelToConsume = 0.01f * m_pFuelTank->getFuelDensity();
 
-	float fuelToConsume = 0.01f * m_pFuelTank->getFuelDensity();
+		//checks if there is enough fuel to consume and if so, consumes it
+		if (m_pFuelTank->canConsumeFuel(fuelToConsume)) {
 
-	//checks if there is enough fuel to consume and if so, consumes it
-	if (m_pFuelTank->canConsumeFuel(fuelToConsume)) {
-		
-		m_pFuelTank->consumeFuel(fuelToConsume);
+			m_pFuelTank->consumeFuel(fuelToConsume);
 
-		float energy = fuelToConsume;
-		float energyMain = energy * m_lMainThrottle / (m_lMainThrottle + m_lRudderThrottle);
-		float energyRudder = energy - energyMain;
+			float energy = fuelToConsume;
+			float energyMain = energy * m_lMainThrottle / (m_lMainThrottle + m_lRudderThrottle);
+			float energyRudder = energy - energyMain;
 
-		m_rudderPropeller.addEnergy(energyRudder); //add energy to the rudder propeller
-		m_mainPropeller.addEnergy(energyMain); //add energy to the main propeller
-	}
-	//ask each propeller how much thrust they are providing, get direction from m_mainPropellerDirection and m_rudderPropellerDirection
-	//Once it has magnitude and direction, create force vector for each propeller and add them up to send to force accumulator
-	newtons mainThrust = m_mainPropeller.getPropulsionStrength();
-	newtons rudderThrust = m_rudderPropeller.getPropulsionStrength();
-	FVector mainDirection = m_mainPropellerDirection->GetActorForwardVector();
-	FVector rudderDirection = m_rudderPropellerDirection->GetActorForwardVector();
-	//continue working on this to make the length of the direction vector equal to the magnitude of MainThrust/rudderThrust
-	 
+			m_rudderPropeller.addEnergy(energyRudder); //add energy to the rudder propeller
+			m_mainPropeller.addEnergy(energyMain); //add energy to the main propeller
+		}
+		//ask each propeller how much thrust they are providing, get direction from m_mainPropellerDirection and m_rudderPropellerDirection
+		newtons mainThrust = m_mainPropeller.getPropulsionStrength();
+		newtons rudderThrust = m_rudderPropeller.getPropulsionStrength();
+		FVector mainDirection = m_mainPropellerDirection->GetActorForwardVector();
+		FVector rudderDirection = m_rudderPropellerDirection->GetActorForwardVector();
+		//makes the magnitude of main and rudder direction to be equal to the thrust, then sends the force to the force accumulator
+		mainDirection.Normalize();
+		mainDirection *= mainThrust;
+		rudderDirection.Normalize();
+		rudderDirection *= rudderThrust;
+		pAccumulator->addForce(Force{ Force::PROPULSION, mainDirection });
 }
+
 

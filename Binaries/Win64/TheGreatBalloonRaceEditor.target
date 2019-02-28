@@ -17,15 +17,15 @@
 	"BuildProducts" :
 	[
 		{
-			"Path" : "$(ProjectDir)/Binaries/Win64/UE4Editor-TheGreatBalloonRace-9621.dll",
+			"Path" : "$(ProjectDir)/Binaries/Win64/UE4Editor-TheGreatBalloonRace-6948.dll",
 			"Type" : "DynamicLibrary"
 		},
 		{
-			"Path" : "$(ProjectDir)/Binaries/Win64/UE4Editor-TheGreatBalloonRace-9621.pdb",
+			"Path" : "$(ProjectDir)/Binaries/Win64/UE4Editor-TheGreatBalloonRace-6948.pdb",
 			"Type" : "SymbolFile"
 		},
 		{
-			"Path" : "$(ProjectDir)/Intermediate/Build/Win64/UE4Editor/Development/UE4Editor-TheGreatBalloonRace-9621.lib",
+			"Path" : "$(ProjectDir)/Intermediate/Build/Win64/UE4Editor/Development/UE4Editor-TheGreatBalloonRace-6948.lib",
 			"Type" : "ImportLibrary"
 		},
 		{

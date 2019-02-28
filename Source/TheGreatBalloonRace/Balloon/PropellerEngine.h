@@ -8,8 +8,7 @@
 
 //Forward declaration of class
 class FuelTank;
-//the energy content of gasoline in the US, measured in joules per liter
-const joules fuelEnergyContent = 35000000;
+class ForceAccumulator;
 
 class PropellerEngine {
 
@@ -48,8 +47,6 @@ private:
 	//Engine sound
 	USoundCue* m_pEngineSound;
 
-	//Engine on or off
-	bool m_bIsOn;
 
 /**	
  * Private member helper functions
@@ -77,8 +74,8 @@ public:
 	//implemented
 	void setSoundCue(USoundCue* sound) { m_pEngineSound = sound; }
 	
-	//in progress
-	void think();
+	//implemented
+	void think(ForceAccumulator* pAccumulator);
 
 	//implemented
 	void setRPM(uint16 RPM) { m_iRPM = RPM; }

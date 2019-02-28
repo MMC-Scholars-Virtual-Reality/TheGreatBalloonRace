@@ -73,7 +73,7 @@ public:
 	//Called on each frame
 	//Based on the throttle level, consumes an amount of fuel from the fueltank
 	//and adds energy to m_bottomState
-	void Think();
+	void think();
 
 	//Based on atmospheric conditions and m_topState, calculates a buoyant force in newtons
 	newtons GetBuoyantForce();

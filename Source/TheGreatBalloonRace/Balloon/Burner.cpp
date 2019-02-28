@@ -49,7 +49,7 @@ void Burner::AirVolume::updateParametersFromEnergy() {
 	m_temperature = (((2.0 / 3.0) * m_currentEnergy) / BOLTZMANN_CONSTANT);
 }  //Using the kinetic temperature equation, update the current temperature using current energy
 
-void Burner::Think() {
+void Burner::think() {
 	//Using a square root function to model fuel efficiency, we find the amount of fuel to consume
 	float fuelToConsume = sqrtf(m_throttle); 
 	m_pFuelTank->consumeFuel(fuelToConsume); //Consume the fuel from the tank

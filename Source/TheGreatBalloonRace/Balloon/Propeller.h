@@ -3,6 +3,7 @@
 #include "predefs.h"
 #include "VRBase/System/predefs.h"
 
+class ForceAccumulator;
 class Propeller {
 	/*
 	* Private member variables
@@ -21,12 +22,14 @@ private:
 	* Public members
 	*/
 public:
-	joules		m_jCurrentEnergy = 0; //the current energy being given to the propellers
-	newtons		m_nInertia = 0; //the moment of inertia of the propeller
-	double		m_dRotationalVelo; //revolutions per second of the propeller
+	joules			m_jCurrentEnergy = 0; //the current energy being given to the propellers
+	newtons			m_nInertia = 0; //the moment of inertia of the propeller
+	double			m_dRotationalVelo; //revolutions per second of the propeller
+	ForceAccumulator* m_pfAccum; 
 	/*
 	* Adds energy to be converted into rotational energy of the propeller.
 	*/
+	//implemented
 	void addEnergy(joules jEnergy);
 
 	/**
@@ -34,11 +37,14 @@ public:
 	* Returns a force in newtons to be applied to a ForceAccumulator
 	*
 	*/
+	//Incomplete
 	newtons getPropulsionStrength();
-
+	
+	
 	/**
 	* Models the decay of energy over time
 	*/
+	//implemented
 	void think();
 
 };

@@ -11,7 +11,7 @@
  * 
  */
 UCLASS()
-class THEGREATBALLOONRACE_API ADropTarget : public ABaseEntity
+class VRBASE_API ADropTarget : public ABaseEntity
 {
 	GENERATED_BODY()
 	
@@ -30,4 +30,5 @@ public:
 		UMaterialInterface*		material0;
 	
 	
+
 };

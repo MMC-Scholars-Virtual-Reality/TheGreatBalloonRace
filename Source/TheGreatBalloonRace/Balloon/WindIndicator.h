@@ -1,22 +1,20 @@
 #pragma once
-#include "WindField.h"
 
-class WindIndicator {
-//public member variables
-public:
+#include "CoreMinimal.h"
+#include "VRBase/ABaseEntity/ABaseEntity.h"
+#include "WindIndicator.generated.h"
 
-
-//private member variables
-private:
-
-
-//public member functions
-public:
+/**
+ * 
+ */
+UCLASS()
+class THEGREATBALLOONRACE_API AWindIndicator : public ABaseEntity
+{
+	GENERATED_BODY()
 	
+public:
+	virtual void DefaultThink() override;
 
-
-//private member functions
-private:
-
-
+	
+	
 };

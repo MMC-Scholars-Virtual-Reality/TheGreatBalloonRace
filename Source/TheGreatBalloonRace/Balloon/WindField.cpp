@@ -2,24 +2,40 @@
 #include "ForceAccumulator.h"
 
 namespace WindField {
-	const int numOfAltitudes = 10;
-	FVector m_vDirections[numOfAltitudes]; //array of wind vectors
-	FVector WindVector; //wind vector inserted into the array
+	const int NUM_ALTITUDES = 10;
+	const float WIND_FORCE_MULTIPLIER = 10;
+	FVector g_avDirections[NUM_ALTITUDES]; //array of wind vectors
+	
 	//sets the wind at each altitude and sends the force to Force Accumuator
-	void setWinds(ForceAccumulator* pAccumulator) {
-		for (int i = 0; i < m_vDirections->Size(); i++) {
-			WindVector.X = FMath::FRandRange(0, 1);
-			WindVector.Y = FMath::FRandRange(0, 1);
-			WindVector.Z = FMath::FRandRange(0, 1);
-			m_vDirections[i].Set(WindVector.X, WindVector.Y, WindVector.Z);
-			meters m = pAccumulator->getAircraftAltitude();
-			WindVector = GetWindAtAltitude(m);
-			pAccumulator->addForce(Force{ Force::WIND, WindVector });
+	void GenerateWinds() {
+		FVector WindVector; //wind vector inserted into the array
+		for (int i = 0; i < g_avDirections->Size(); i++) {
+			WindVector.X = FMath::FRandRange(-1, 1);
+			WindVector.Y = FMath::FRandRange(-1, 1);
+			while (WindVector.Size() > 1) {
+				WindVector.X = FMath::FRandRange(-1, 1);
+				WindVector.Y = FMath::FRandRange(-1, 1);
+			}
+			g_avDirections[i].Set(WindVector.X, WindVector.Y, 0);
 		}
 	}
 	//gets the wind at specific altitude
-	FVector GetWindAtAltitude(meters m) {
-		int index = fmod(m, 10);
-		return m_vDirections[index];
+	FVector GetWindDirectionAtAltitude(meters m) {
+		int FirstIndex = fmod(m / 100, NUM_ALTITUDES);
+		int SecondIndex = fmod(FirstIndex + 1, NUM_ALTITUDES);
+		float FirstPercent = fmod(m, 100) / 100;
+		float SecondPercent = 1 - FirstPercent;
+		FVector firstWind = g_avDirections[FirstIndex];
+		FVector secondWind = g_avDirections[SecondIndex];
+		FVector WindDirection = (FirstPercent * firstWind) + (SecondPercent * secondWind);
+		return WindDirection;
+	}
+	Force GetWindForceAtAltitude(meters m) {
+		FVector WindForce = GetWindDirectionAtAltitude(m) * WIND_FORCE_MULTIPLIER;
+		Force f;
+		f.m_vector = WindForce;
+		f.m_eForceType = Force::WIND;
+		return f;
+		
 	}
 }

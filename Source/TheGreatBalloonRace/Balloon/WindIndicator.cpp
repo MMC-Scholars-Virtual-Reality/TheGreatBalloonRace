@@ -2,5 +2,8 @@
 
 
 
+void AWindIndicator::DefaultThink() {
+
+}
 
 

@@ -6,8 +6,9 @@
 class ForceAccumulator;
 namespace WindField {
 	//implemented
-	void setWinds(ForceAccumulator* pAccumulator);
+	void GenerateWinds();
+	FVector GetWindDirectionAtAltitude(meters m);
 	//implemented
-	FVector GetWindAtAltitude(meters m);
+	Force GetWindForceAtAltitude(meters m);
 	
 };

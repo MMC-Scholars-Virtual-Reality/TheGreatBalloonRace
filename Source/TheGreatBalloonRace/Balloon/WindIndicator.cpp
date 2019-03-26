@@ -6,13 +6,14 @@ ENGINE_ArrowComponent_generated_h;
 
 //WiNDICATOR
 AWindIndicator::AWindIndicator() {
-	//m_pWindArrow->CreateDefaultSubobject<UArrowComponent>("WindArroww");
-	//m_pWindArrow->SetVisibility(true);
-	
+	m_pWindArrow = CreateDefaultSubobject<UArrowComponent>("WindArroww");
+	m_pWindArrow->SetVisibility(true);
 }
+
 void AWindIndicator::DefaultThink() {
 	meters m = GetActorLocation().Z;
-	FVector WindDirection = WindField::GetWindDirectionAtAltitude(m);
+	FVector WindDirection;
+	WindDirection = WindField::GetWindDirectionAtAltitude(m);
 	m_pWindArrow->SetWorldRotation(WindDirection.Rotation());
-	
 }
+

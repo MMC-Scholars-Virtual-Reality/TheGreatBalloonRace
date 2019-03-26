@@ -16,6 +16,7 @@ class THEGREATBALLOONRACE_API AWindIndicator : public ABaseEntity
 public:
 	AWindIndicator();
 	virtual void DefaultThink() override;
+	
 
 	//private member variables
 private:

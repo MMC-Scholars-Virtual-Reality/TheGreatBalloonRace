@@ -17,7 +17,8 @@ private:
  * Public members
  */
 public:
-
+	
+	FuelTank() : FuelTank(100.f) { };
 	/**
 	 * Constructor builds a fuel tank with the given fuel capacity
 	 * @param _flFuelCapacity - the capacity of the tank, in arbitrary units.

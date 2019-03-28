@@ -3,25 +3,26 @@
 #include "CoreMinimal.h"
 #include "VRBase/ABaseEntity/ABaseEntity.h"
 #include "VRBase/AMoveLinear/AMoveLinear.h"
+#include "PropellerEngine.h"
+#include "predefs.h"
 #include "RudderController.generated.h"
+
 
 
 /**
  * 
  */
 UCLASS()
-class THEGREATBALLOONRACE_API ARudderController : public ABaseMoving
+class THEGREATBALLOONRACE_API ARudderController : public AMoveLinear
 {
 	GENERATED_BODY()
 //public member functions
 public:
 	ARudderController();
-	void think(ABaseController* pController);
+	void DefaultThink() override;
 
 //public member variables
 public:
-	ABaseController* pController;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "ARudderController")
-		UStaticMeshComponent* m_rudderController;
-	
+	PropellerEngine* m_pEngine; //still needs to be set to point to an engine
+
 };

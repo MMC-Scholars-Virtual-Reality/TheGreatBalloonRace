@@ -3,6 +3,10 @@
 #include "ABaseEntity/ABaseEntity.h"
 #include "predefs.h"
 
+ForceAccumulator::ForceAccumulator() : m_burner(1000, 4000, 1000) {
+	m_pBalloon = NULL;
+}
+
 meters ForceAccumulator::getAircraftAltitude() {
 	return 0; //Returns the altitude of the aircraft
 }

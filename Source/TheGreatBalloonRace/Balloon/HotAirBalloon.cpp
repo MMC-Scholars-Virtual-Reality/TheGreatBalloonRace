@@ -1,7 +1,7 @@
 
 #include "HotAirBalloon.h"
 
-AHotAirBalloon::AHotAirBalloon() : m_FuelTank(100.f) {
+AHotAirBalloon::AHotAirBalloon() {
 	//m_pBurnerController = NULL;
 	//m_BalloonMesh = CreateDefaultSubobject<UStaticMeshComponent>("m_BalloonMesh");
 }

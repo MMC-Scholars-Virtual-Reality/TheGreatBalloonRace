@@ -9,6 +9,8 @@
 class ForceAccumulator {
 public:
 
+	ForceAccumulator();
+
 	//Returns the atltitude of the aircraft
 	meters getAircraftAltitude();
 

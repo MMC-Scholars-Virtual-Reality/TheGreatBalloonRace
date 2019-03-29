@@ -70,6 +70,8 @@ private:
 	lerp m_throttle; //Is the burner on or off, on a range from 0 to 1
 
 public:
+	Burner(const float _BalloonRadius, const float _currentEnergy, const float _temperature);
+
 	//Called on each frame
 	//Based on the throttle level, consumes an amount of fuel from the fueltank
 	//and adds energy to m_bottomState

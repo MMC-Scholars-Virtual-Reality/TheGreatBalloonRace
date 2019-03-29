@@ -28,13 +28,9 @@ public:
 
 	//private member variables
 private:
-	PropellerEngine m_Engine;
-	FuelTank m_FuelTank;
-	//ForceAccumulator m_ForceAccumulator;
-	/*Burner m_Burner;
-	Propeller m_Propeller;
-	BurnerController* m_pBurnerController;
+	ForceAccumulator m_ForceAccumulator;
+	ABurnerController* m_pBurnerController;
 	UStaticMeshComponent* m_BalloonMesh;
-	*/
+	
 	//finish checking each object and adding default constructor if needed like in fueltank
 };

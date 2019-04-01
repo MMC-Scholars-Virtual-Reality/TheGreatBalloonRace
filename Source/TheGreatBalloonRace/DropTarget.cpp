@@ -20,3 +20,19 @@ ADropTarget::ADropTarget() {
 	m_pPickupMeshComponent->bGenerateOverlapEvents = true;
 }
 
+void ADropTarget::PreInit() {
+	Super::PreInit();
+	m_centerLoc = GetActorLocation();
+}
+
+void ADropTarget::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
+	m_pPickup = dynamic_cast<APickup*>(OtherActor);
+	if (m_pPickup) {
+		Msg("ITS A PICKUP! SOME POINT(S) ADDED");
+	}
+}
+
+void ADropTarget::OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex) {
+	Msg(__FUNCTION__);
+}
+

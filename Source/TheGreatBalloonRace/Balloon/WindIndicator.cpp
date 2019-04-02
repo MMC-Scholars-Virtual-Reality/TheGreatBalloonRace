@@ -16,4 +16,3 @@ void AWindIndicator::DefaultThink() {
 	WindDirection = WindField::GetWindDirectionAtAltitude(m);
 	m_pWindArrow->SetWorldRotation(WindDirection.Rotation());
 }
-

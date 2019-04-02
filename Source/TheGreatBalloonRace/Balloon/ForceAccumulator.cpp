@@ -22,8 +22,8 @@ FVector ForceAccumulator::getSummedForces() {
 	addForce(gravitation);
 
 	//const float baseDrag = 50;
-	Force drag = Force{ Force::DRAG, -m_pBalloon->GetVelocity() };
-	addForce(drag);
+	//Force drag = Force{ Force::DRAG, -m_pBalloon->GetVelocity() };
+	//addForce(drag);
 
 	//Checks if there are the required amount of forces in the force array
 	if (m_forces.Num() != Force::NUM_FORCES) {
@@ -53,4 +53,5 @@ void ForceAccumulator::addForce(const Force& F) {
 void ForceAccumulator::Think() {
 	m_burner.think();
 	m_propellerEngine.think(this);
+
 }

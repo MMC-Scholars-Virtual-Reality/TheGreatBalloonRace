@@ -15,7 +15,8 @@ class PropellerEngine {
 public:
 	// Constructor
 	PropellerEngine();
-
+public:
+	Propeller m_Propeller;
 /**
  * Private member variables
  */

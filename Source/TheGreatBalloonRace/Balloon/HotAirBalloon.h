@@ -24,13 +24,13 @@ public:
 	void PostInit() override;
 	void DefaultThink() override;
 
-
-
+	//public member variables
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Static Mesh")
+		UStaticMeshComponent* m_BalloonMesh;
 	//private member variables
 private:
 	ForceAccumulator m_ForceAccumulator;
 	ABurnerController* m_pBurnerController;
-	UStaticMeshComponent* m_BalloonMesh;
 	
-	//finish checking each object and adding default constructor if needed like in fueltank
 };

@@ -5,7 +5,7 @@ ABurnerController::ABurnerController() {
 	m_pBurner = NULL;
 }
 void ABurnerController::DefaultThink() {
-	m_pBurner->SetThrottleLevel(GetLerpPosition());
+	//m_pBurner->SetThrottleLevel(GetLerpPosition());
 }
 
 

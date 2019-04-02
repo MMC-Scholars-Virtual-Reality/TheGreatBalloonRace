@@ -1,6 +1,7 @@
 #include "ForceAccumulator.h"
 #include "System/NLogger.h"
 #include "ABaseEntity/ABaseEntity.h"
+#include "HotAirBalloon.h"
 #include "predefs.h"
 
 ForceAccumulator::ForceAccumulator() : m_burner(1000, 4000, 1000) {
@@ -16,14 +17,14 @@ void ForceAccumulator::reset() {
 }
 
 FVector ForceAccumulator::getSummedForces() {
-	//m_pBalloon->
-	const float massOfBalloon = 400;
+	
+	float massOfBalloon = m_pBalloon->GetMass();
 	Force gravitation = Force{ Force::GRAVITY, FVector(0, 0, -massOfBalloon * gravity) };
 	addForce(gravitation);
 
 	//const float baseDrag = 50;
-	//Force drag = Force{ Force::DRAG, -m_pBalloon->GetVelocity() };
-	//addForce(drag);
+	Force drag = Force{ Force::DRAG, -m_pBalloon->GetVelocity() };
+	addForce(drag);
 
 	//Checks if there are the required amount of forces in the force array
 	if (m_forces.Num() != Force::NUM_FORCES) {

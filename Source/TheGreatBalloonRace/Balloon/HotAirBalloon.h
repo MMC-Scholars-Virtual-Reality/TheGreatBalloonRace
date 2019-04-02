@@ -24,6 +24,8 @@ public:
 	void PostInit() override;
 	void DefaultThink() override;
 
+	kilos GetMass();
+
 	//public member variables
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Static Mesh")
@@ -33,4 +35,7 @@ private:
 	ForceAccumulator m_ForceAccumulator;
 	ABurnerController* m_pBurnerController;
 	
+	//Movement
+	FVector m_velocity;
+	void MoveThink(FVector acceleration);
 };

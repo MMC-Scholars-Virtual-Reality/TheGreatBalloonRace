@@ -6,7 +6,10 @@
 #include "UnrealEngine.h"
 #include "predefs.h"
 
+class AHotAirBalloon;
+
 class ForceAccumulator {
+	friend class AHotAirBalloon;
 public:
 
 	ForceAccumulator();
@@ -26,6 +29,7 @@ public:
 
 	void Think();
 
+
 private:
 
 	//An array of the forces on the aircraft
@@ -35,6 +39,8 @@ private:
 	Burner m_burner;
 	PropellerEngine m_propellerEngine;
 	FuelTank m_fuelTank;
-	ABaseEntity* m_pBalloon;
+	AHotAirBalloon* m_pBalloon;
+
+
 	
 };

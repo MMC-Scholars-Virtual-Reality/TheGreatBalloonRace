@@ -6,6 +6,7 @@ typedef float liters;
 typedef float meters;
 typedef float kelvin;
 typedef float atmos;
+typedef float kilos;
 typedef float density;
 typedef float therm_cond;
 #define min(a, b) ((a) < (b) ? a : b)

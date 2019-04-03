@@ -7,12 +7,11 @@ AHotAirBalloon::AHotAirBalloon() {
 	m_pBurnerController = CreateDefaultSubobject<ABurnerController>("m_pBurnerController");
 	
 	m_ForceAccumulator.m_pBalloon = this;
+	//*(m_pBurnerController->m_pBurner) = m_ForceAccumulator.m_burner;
 }
 
 void AHotAirBalloon::PreInit() {
-	//FVector loc = GetActorLocation();
-	//m_pBurnerController = (ABurnerController*) g_pWorld->SpawnActor(ABurnerController::StaticClass(), &loc);
-	m_velocity = FVector::ZeroVector;
+	m_velocity = FVector::ZeroVector; //sets velocity to 0
 }
 
 void AHotAirBalloon::PostInit() {
@@ -22,7 +21,6 @@ void AHotAirBalloon::PostInit() {
 //models the movement in response to forces
 void AHotAirBalloon::DefaultThink() {
 	m_ForceAccumulator.Think();
-
 	FVector acceleration = m_ForceAccumulator.getSummedForces() / GetMass();
 	Msg(acceleration);
 	MoveThink(acceleration);
@@ -45,5 +43,3 @@ void AHotAirBalloon::MoveThink(FVector acceleration) {
 	FVector dp = m_velocity * g_pGlobals->frametime;
 	AddActorLocalOffset(dp);
 }
-
-

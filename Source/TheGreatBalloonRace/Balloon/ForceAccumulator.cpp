@@ -54,5 +54,4 @@ void ForceAccumulator::addForce(const Force& F) {
 void ForceAccumulator::Think() {
 	m_burner.think();
 	m_propellerEngine.think(this);
-
 }

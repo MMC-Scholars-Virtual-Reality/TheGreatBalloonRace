@@ -24,7 +24,7 @@ public:
 
 	// Components
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Target")
-		UStaticMeshComponent*	m_pPickupMeshComponent;
+		UStaticMeshComponent*	m_pDropTargetMeshComponent;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Target Static Mesh")
 		UStaticMesh*			staticMesh;

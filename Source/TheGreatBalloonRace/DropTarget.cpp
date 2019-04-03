@@ -4,32 +4,33 @@
 
 ADropTarget::ADropTarget() {
 	// set default mesh
-	staticMesh = NULL;
+	// staticMesh = NULL;
 
 	// static mesh component
-	m_pPickupMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>("Static Mesh Component");
-	m_pPickupMeshComponent->SetStaticMesh(staticMesh);
+	m_pDropTargetMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>("Static Mesh Component");
+	m_pDropTargetMeshComponent->SetStaticMesh(staticMesh);
 
 	// set default material
-	material0 = m_pPickupMeshComponent->GetMaterial(0);
+	material0 = m_pDropTargetMeshComponent->GetMaterial(0);
 
 	// set root component
-	RootComponent = m_pPickupMeshComponent;
+	RootComponent = m_pDropTargetMeshComponent;
 
 	// enable overlap
-	m_pPickupMeshComponent->bGenerateOverlapEvents = true;
+	m_pDropTargetMeshComponent->bGenerateOverlapEvents = true;
+
+	m_pDropTargetMeshComponent->OnComponentBeginOverlap.AddDynamic(this, &ADropTarget::OnOverlapBegin);
+	m_pDropTargetMeshComponent->OnComponentEndOverlap.AddDynamic(this, &ADropTarget::OnOverlapEnd);
 }
 
 void ADropTarget::PreInit() {
 	Super::PreInit();
 	m_centerLoc = GetActorLocation();
+	Msg("preinit");
 }
 
 void ADropTarget::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
-	m_pPickup = dynamic_cast<APickup*>(OtherActor);
-	if (m_pPickup) {
 		Msg("ITS A PICKUP! SOME POINT(S) ADDED");
-	}
 }
 
 void ADropTarget::OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex) {

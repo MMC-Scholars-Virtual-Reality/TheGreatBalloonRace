@@ -11,7 +11,7 @@ class FuelTank;
 class ForceAccumulator;
 
 class PropellerEngine {
-
+	friend class ForceAccumulator;
 public:
 	// Constructor
 	PropellerEngine();

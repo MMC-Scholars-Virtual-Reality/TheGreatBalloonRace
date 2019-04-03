@@ -11,6 +11,7 @@ class ForceAccumulator;
  */
 class Burner {
 private:
+	friend class ForceAccumulator;
 	class AirVolume {
 
 	private:

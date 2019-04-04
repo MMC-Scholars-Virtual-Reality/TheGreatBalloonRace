@@ -8,6 +8,7 @@
 #include "Burner.h"
 #include "Propeller.h"
 #include "BurnerController.h"
+#include "RudderController.h"
 #include "HotAirBalloon.generated.h"
 
 /**
@@ -34,6 +35,7 @@ public:
 private:
 	ForceAccumulator m_ForceAccumulator;
 	ABurnerController* m_pBurnerController;
+	ARudderController* m_pRudderController;
 	
 	//Movement
 	FVector m_velocity;

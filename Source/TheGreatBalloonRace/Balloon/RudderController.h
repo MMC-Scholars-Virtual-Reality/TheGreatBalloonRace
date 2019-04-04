@@ -23,6 +23,6 @@ public:
 
 //public member variables
 public:
-	PropellerEngine* m_pEngine; //still needs to be set to point to an engine
+	PropellerEngine* m_pEngine; 
 
 };

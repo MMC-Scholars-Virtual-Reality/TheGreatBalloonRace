@@ -5,9 +5,12 @@
 AHotAirBalloon::AHotAirBalloon() {
 	m_BalloonMesh = CreateDefaultSubobject<UStaticMeshComponent>("m_BalloonMesh");
 	m_pBurnerController = CreateDefaultSubobject<ABurnerController>("m_pBurnerController");
+	m_pRudderController = CreateDefaultSubobject<ARudderController>("m_pRudderController");
+
 	
 	m_ForceAccumulator.m_pBalloon = this;
 	m_pBurnerController->m_pBurner = &m_ForceAccumulator.m_burner;
+	m_pRudderController->m_pEngine = &m_ForceAccumulator.m_propellerEngine;
 }
 
 void AHotAirBalloon::PreInit() {

@@ -7,7 +7,6 @@ AHotAirBalloon::AHotAirBalloon() {
 	m_pBurnerController = CreateDefaultSubobject<ABurnerController>("m_pBurnerController");
 	m_pRudderController = CreateDefaultSubobject<ARudderController>("m_pRudderController");
 
-	
 	m_ForceAccumulator.m_pBalloon = this;
 	m_pBurnerController->m_pBurner = &m_ForceAccumulator.m_burner;
 	m_pRudderController->m_pEngine = &m_ForceAccumulator.m_propellerEngine;
@@ -23,14 +22,14 @@ void AHotAirBalloon::PostInit() {
 
 //models the movement in response to forces
 void AHotAirBalloon::DefaultThink() {
-//	m_ForceAccumulator.Think();
+	m_ForceAccumulator.Think();
 	FVector acceleration = m_ForceAccumulator.getSummedForces() / GetMass();
 	//Msg(acceleration);
 	MoveThink(acceleration);
 }
 
 kilos AHotAirBalloon::GetMass() {
-	return 1000;
+	return 400 + m_ForceAccumulator.m_burner.GetAirMass();
 }
 
 void AHotAirBalloon::MoveThink(FVector acceleration) {
@@ -43,6 +42,7 @@ void AHotAirBalloon::MoveThink(FVector acceleration) {
 	m_velocity += dv;
 
 	//calculate change in position
-	FVector dp = m_velocity * g_pGlobals->frametime;
+	//our velocity is m/s, but Unreal world units are cm
+	FVector dp = m_velocity * 100 * g_pGlobals->frametime;
 	AddActorLocalOffset(dp);
 }

@@ -7,7 +7,7 @@ namespace Atmosphere {
 	static kelvin g_surfaceTemp = 287; //Surface temperature is 287 by default
 
 	atmos getAirPressureAtAltitude(meters m) {
-		return pow(euler, (-MOLAR_MASS_AIR * gravity * m) / (UNI_GAS_CONST * getAirTemperatureAtAltitude(m)));
+		return pow(euler, (-MOLAR_MASS_AIR * gravity * m / 1000) / (UNI_GAS_CONST * getAirTemperatureAtAltitude(m)));
 	}
 
 	kelvin getAirTemperatureAtAltitude(meters m) {
@@ -15,7 +15,10 @@ namespace Atmosphere {
 	}
 
 	density getAirDensityAtAltitude(meters m) {
-		return getAirPressureAtAltitude(m) / (SP_GAS_CONST_AIR * getAirTemperatureAtAltitude(m));
+		//return getAirPressureAtAltitude(m) / (SP_GAS_CONST_AIR * getAirTemperatureAtAltitude(m));
+		//linear approximation
+		float densityMetersCubed = 1.225 - 0.1 * (m / 1000);
+		return densityMetersCubed / 1000; //kg/L
 	}
 
 	therm_cond getThermalConductivityOfAir(kelvin k) {

@@ -58,6 +58,9 @@ void PropellerEngine::setByGearIndepRPM(uint16 indepRPM) {
 
 //function that goes off every frame during the program
 void PropellerEngine::think(ForceAccumulator* pAccumulator) {
+	if (!m_mainPropellerDirection || !m_rudderPropellerDirection)
+		return;
+
 
 	m_mainPropeller.think();
 	m_rudderPropeller.think();

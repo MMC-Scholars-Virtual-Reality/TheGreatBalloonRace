@@ -46,7 +46,7 @@ private:
 		void transferHeatTo(meters area, meters altitude, AirVolume* pOtherVolume = nullptr);
 
 		//Based on temperature and other parameters, updates energy
-		void updateParametersFromTemperature();
+		//void updateParametersFromTemperature();
 
 		//Based on energy and other parameters, updates temperature
 		void updateParametersFromEnergy();
@@ -54,12 +54,15 @@ private:
 		/**
 		* @return m_volume
 		*/
-		meters getVolume() const { return m_volume; }
+		meters getVolumeMeters() const { return m_volume; }
+		liters getVolumeLitres() const { return m_volume * 1000; }
 
 		/**
 		* @return m_radius
 		*/
 		meters getRadius() const { return m_radius; }
+
+		float getDensityCalculated(ForceAccumulator*) const;
 
 	} m_bottomState, m_topState;
 
@@ -83,4 +86,7 @@ public:
 
 	//Given a throttle level sets the throttle to the given level
 	void SetThrottleLevel(lerp _throttle);
+
+	//Gets the mass of the air inside the balloon
+	kilos GetAirMass() const;
 };

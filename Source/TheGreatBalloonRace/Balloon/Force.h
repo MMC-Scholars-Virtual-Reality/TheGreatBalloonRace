@@ -20,4 +20,21 @@ struct Force {
 	*/
 	FVector m_vector;
 
+	inline FString getAsString() const {
+		const char* pre = "UNKNOWN";
+		switch (m_eForceType) {
+		case PROPULSION: pre = "PROPULSION"; break;
+		case DRAG: pre = "DRAG"; break;
+		case GRAVITY: pre = "GRAVITY"; break;
+		case BUOYANCY: pre = "BUOYANCY"; break;
+		case WIND: pre = "WIND"; break;
+		}
+
+		FString result = pre;
+		char buffer[64];
+		sprintf_s(buffer, " (%.2f, %.2f, %.2f)", m_vector.X, m_vector.Z, m_vector.Y);
+		result += buffer;
+		return result;
+	}
+
 };

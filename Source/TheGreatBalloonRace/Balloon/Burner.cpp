@@ -11,6 +11,8 @@ Burner::AirVolume::AirVolume(const float _BalloonRadius, const float _currentEne
 
 	//Use half-sphere volume equation
 	m_volume = (2.f / 3.f) * PI * powf(m_radius, 3);
+
+	updateParametersFromEnergy();
 }
 
 void Burner::AirVolume::addEnergy(const joules heat) {
@@ -41,13 +43,20 @@ void Burner::AirVolume::transferHeatTo(meters area, meters altitude, AirVolume* 
 	}
 }
 
-void Burner::AirVolume::updateParametersFromTemperature() {
+/*void Burner::AirVolume::updateParametersFromTemperature() {
 
-}
+}*/
 
 void Burner::AirVolume::updateParametersFromEnergy() {
 	m_temperature = (((2.0 / 3.0) * m_currentEnergy) / BOLTZMANN_CONSTANT);
 }  //Using the kinetic temperature equation, update the current temperature using current energy
+
+float Burner::AirVolume::getDensityCalculated(ForceAccumulator* pAccumulator) const {
+	//d = MP/RT * 1000
+	float pressure = Atmosphere::getAirPressureAtAltitude(pAccumulator->getAircraftAltitude());
+	kelvin temp = m_temperature;
+	return MOLAR_MASS_AIR * pressure / (UNI_GAS_CONST * temp) * 1000;
+}
 
 Burner::Burner(const float _BalloonRadius, const float _currentEnergy, const float _temperature)
 	: m_topState(_BalloonRadius, _currentEnergy, _temperature),
@@ -57,7 +66,7 @@ Burner::Burner(const float _BalloonRadius, const float _currentEnergy, const flo
 
 void Burner::think() {
 	//Using a square root function to model fuel efficiency, we find the amount of fuel to consume
-	float fuelToConsume = sqrtf(m_throttle); 
+	/*float fuelToConsume = sqrtf(m_throttle); 
 	m_pFuelTank->consumeFuel(fuelToConsume); //Consume the fuel from the tank
 
 	m_bottomState.addEnergy(m_throttle * 500 * m_pFuelTank->getFuelDensity()); //Add energy to the bottom state based on the throttle
@@ -68,7 +77,9 @@ void Burner::think() {
 
 	//Transfer heat from the top volume to the outside atmosphere
 	//The area is half of a sphere's surface area to model the balloon itself
-	m_topState.transferHeatTo(2 * PI * sqr(m_topState.getRadius()), m_pForceAccumulator->getAircraftAltitude(), NULL);
+	m_topState.transferHeatTo(2 * PI * sqr(m_topState.getRadius()), m_pForceAccumulator->getAircraftAltitude(), NULL);*/
+
+	m_pForceAccumulator->addForce(Force{ Force::BUOYANCY, FVector(0,0,GetBuoyantForce()) });
 }
 
 void Burner::SetThrottleLevel(lerp _throttle) {
@@ -76,5 +87,10 @@ void Burner::SetThrottleLevel(lerp _throttle) {
 }
 
 newtons Burner::GetBuoyantForce() {
-	return (Atmosphere::getAirDensityAtAltitude(m_pForceAccumulator->getAircraftAltitude()) * gravity * m_topState.getVolume());
+	return (Atmosphere::getAirDensityAtAltitude(m_pForceAccumulator->getAircraftAltitude()) * gravity * m_topState.getVolumeLitres());
 } //Using the buoyant force equation, calculate the buoyant force and return it
+
+kilos Burner::GetAirMass() const {
+	return m_bottomState.getDensityCalculated(m_pForceAccumulator) * m_bottomState.getVolumeLitres()
+		+ m_topState.getDensityCalculated(m_pForceAccumulator) * m_topState.getVolumeLitres();
+}

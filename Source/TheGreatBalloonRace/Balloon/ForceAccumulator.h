@@ -15,7 +15,7 @@ public:
 	ForceAccumulator();
 
 	//Returns the atltitude of the aircraft
-	meters getAircraftAltitude();
+	meters getAircraftAltitude() const;
 
 	//Resets the forces on the aircraft
 	void reset();
@@ -29,6 +29,7 @@ public:
 
 	void Think();
 
+	void forceReport() const;
 
 private:
 

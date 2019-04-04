@@ -40,4 +40,7 @@ private:
 	//Movement
 	FVector m_velocity;
 	void MoveThink(FVector acceleration);
+
+public:
+	FVector GetVelocity() const override { return m_velocity; }
 };

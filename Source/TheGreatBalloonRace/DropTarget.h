@@ -21,6 +21,7 @@ public:
 
 	ADropTarget();
 	void PreInit() override;
+	bool isOverlapping(APickup*);
 
 	// Components
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Target")
@@ -40,6 +41,5 @@ public:
 	UFUNCTION()
 		void OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 	
-	FVector m_centerLoc;
 	APickup* m_pPickup;
 };

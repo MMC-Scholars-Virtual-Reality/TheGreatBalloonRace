@@ -47,15 +47,25 @@ void Burner::AirVolume::transferHeatTo(meters area, meters altitude, AirVolume* 
 
 }*/
 
+void Burner::addEnergy(joules energy) {
+	m_topState.addEnergy(energy);
+	m_bottomState.addEnergy(energy);
+}
+
 void Burner::AirVolume::updateParametersFromEnergy() {
-	m_temperature = (((2.0 / 3.0) * m_currentEnergy) / BOLTZMANN_CONSTANT);
+	m_temperature = m_currentEnergy;
+	//m_temperature = (((2.0 / 3.0) * m_currentEnergy) / BOLTZMANN_CONSTANT);
 }  //Using the kinetic temperature equation, update the current temperature using current energy
 
-float Burner::AirVolume::getDensityCalculated(ForceAccumulator* pAccumulator) const {
+float Burner::AirVolume::getDensityCalculated(const ForceAccumulator* pAccumulator) const {
 	//d = MP/RT * 1000
-	float pressure = Atmosphere::getAirPressureAtAltitude(pAccumulator->getAircraftAltitude());
+	/*float pressure = Atmosphere::getAirPressureAtAltitude(pAccumulator->getAircraftAltitude());
 	kelvin temp = m_temperature;
-	return MOLAR_MASS_AIR * pressure / (UNI_GAS_CONST * temp) * 1000;
+	return MOLAR_MASS_AIR * pressure / (UNI_GAS_CONST * temp);*/
+
+	//this is an approximation, not accurate at all
+	return Atmosphere::getAirDensityAtAltitude(pAccumulator->getAircraftAltitude())
+		- ((m_temperature - 273) / 1000000);
 }
 
 Burner::Burner(const float _BalloonRadius, const float _currentEnergy, const float _temperature)
@@ -91,6 +101,6 @@ newtons Burner::GetBuoyantForce() {
 } //Using the buoyant force equation, calculate the buoyant force and return it
 
 kilos Burner::GetAirMass() const {
-	return m_bottomState.getDensityCalculated(m_pForceAccumulator) * m_bottomState.getVolumeLitres()
-		+ m_topState.getDensityCalculated(m_pForceAccumulator) * m_topState.getVolumeLitres();
+	return /*m_bottomState.getDensityCalculated(m_pForceAccumulator) * m_bottomState.getVolumeLitres()
+		+*/ m_topState.getDensityCalculated(m_pForceAccumulator) * m_topState.getVolumeLitres();
 }

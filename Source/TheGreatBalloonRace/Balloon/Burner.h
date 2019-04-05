@@ -51,6 +51,10 @@ private:
 		//Based on energy and other parameters, updates temperature
 		void updateParametersFromEnergy();
 
+		inline kelvin getTemperature() const {
+			return m_temperature;
+		}
+
 		/**
 		* @return m_volume
 		*/
@@ -62,7 +66,7 @@ private:
 		*/
 		meters getRadius() const { return m_radius; }
 
-		float getDensityCalculated(ForceAccumulator*) const;
+		float getDensityCalculated(const ForceAccumulator*) const;
 
 	} m_bottomState, m_topState;
 
@@ -80,6 +84,8 @@ public:
 	//Based on the throttle level, consumes an amount of fuel from the fueltank
 	//and adds energy to m_bottomState
 	void think();
+
+	void addEnergy(joules);
 
 	//Based on atmospheric conditions and m_topState, calculates a buoyant force in newtons
 	newtons GetBuoyantForce();

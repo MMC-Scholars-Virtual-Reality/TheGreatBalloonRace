@@ -31,6 +31,10 @@ public:
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Static Mesh")
 		UStaticMeshComponent* m_BalloonMesh;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Physics Parameters")
+		float m_flStartingBalloonEnergy;
+
 	//private member variables
 private:
 	ForceAccumulator m_ForceAccumulator;

@@ -14,6 +14,7 @@ AHotAirBalloon::AHotAirBalloon() {
 
 void AHotAirBalloon::PreInit() {
 	m_velocity = FVector::ZeroVector; //sets velocity to 0
+	m_ForceAccumulator.m_burner.addEnergy(m_flStartingBalloonEnergy);
 }
 
 void AHotAirBalloon::PostInit() {
@@ -29,7 +30,7 @@ void AHotAirBalloon::DefaultThink() {
 }
 
 kilos AHotAirBalloon::GetMass() {
-	return 400 + m_ForceAccumulator.m_burner.GetAirMass();
+	return 100 + m_ForceAccumulator.m_burner.GetAirMass();
 }
 
 void AHotAirBalloon::MoveThink(FVector acceleration) {

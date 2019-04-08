@@ -28,6 +28,7 @@ ADropTarget::ADropTarget() {
 void ADropTarget::PreInit() {
 	Super::PreInit();
 	Msg("preinit");
+	SetThink(&ADropTarget::ScoreThink);
 }
 
 bool ADropTarget::isOverlapping(APickup* pPickup) {
@@ -41,8 +42,31 @@ bool ADropTarget::isOverlapping(APickup* pPickup) {
 	return result;
 }
 
+int ADropTarget::calculateScore(APickup* pPickup) {
+	Msg(__FUNCTION__);
+
+
+	return 0;
+}
+
+void ADropTarget::ScoreThink(ADropTarget* vpDropTarget) {
+	ADropTarget* pDropTarget = ExtractArg<ADropTarget>(vpDropTarget);
+	// Loop through each pickup in m_pPickupList
+	bool pickupOverlap = false;
+	int i = 0;
+	while (!pickupOverlap) { // Add condition
+		pickupOverlap = pDropTarget->isOverlapping(pDropTarget->m_aPickupList[i]);
+		if (pickupOverlap) { // If there is a pickup overlap,
+			pDropTarget->calculateScore(pDropTarget->m_aPickupList[i]); //Calculate score
+			pDropTarget->m_aPickupList.RemoveAt(i); // Remove the pickup from list
+		}
+		i++;
+	}
+}
+
+
 void ADropTarget::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
-		Msg(__FUNCTION__);
+	Msg(__FUNCTION__);
 }
 
 void ADropTarget::OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex) {

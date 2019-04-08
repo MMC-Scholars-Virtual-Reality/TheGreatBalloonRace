@@ -20,8 +20,14 @@ class THEGREATBALLOONRACE_API ADropTarget : public ABaseEntity
 public:
 
 	ADropTarget();
+
 	void PreInit() override;
+
 	bool isOverlapping(APickup*);
+
+	int calculateScore(APickup*);
+
+	TArray<APickup*> m_aPickupList; // Can I make this list static?
 
 	// Components
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Target")
@@ -41,5 +47,5 @@ public:
 	UFUNCTION()
 		void OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 	
-	APickup* m_pPickup;
+	static void ScoreThink(ADropTarget* vpDropTarget);
 };

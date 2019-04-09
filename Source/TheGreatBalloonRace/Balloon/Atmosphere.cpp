@@ -18,7 +18,7 @@ namespace Atmosphere {
 		//return getAirPressureAtAltitude(m) / (SP_GAS_CONST_AIR * getAirTemperatureAtAltitude(m));
 		//linear approximation
 		float densityMetersCubed = 1.225 - 0.1 * (m / 1000);
-		return densityMetersCubed / 1000; //kg/L
+		return densityMetersCubed; //kg/L
 	}
 
 	therm_cond getThermalConductivityOfAir(kelvin k) {

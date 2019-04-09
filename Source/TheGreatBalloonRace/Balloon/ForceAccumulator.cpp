@@ -5,7 +5,7 @@
 #include "Atmosphere.h"
 #include "predefs.h"
 
-ForceAccumulator::ForceAccumulator() : m_burner(5, 0, 1000) {
+ForceAccumulator::ForceAccumulator() : m_burner(5, 1000) {
 	m_pBalloon = NULL;
 	m_burner.m_pFuelTank = &m_fuelTank;
 	m_burner.m_pForceAccumulator = this;
@@ -78,8 +78,8 @@ void ForceAccumulator::forceReport() const {
 		Msg("AirDensity: %f", Atmosphere::getAirDensityAtAltitude(getAircraftAltitude()));
 		Msg("AirTemperature: %f", Atmosphere::getAirTemperatureAtAltitude(getAircraftAltitude()));
 		Msg("AirPressure: %f", Atmosphere::getAirPressureAtAltitude(getAircraftAltitude()));
-		Msg("TopStateDensity: %f", m_burner.m_topState.getDensityCalculated(this));
-		Msg("TopStateTemp: %f", m_burner.m_topState.getTemperature());
+		Msg("BalloonDensity: %f", m_burner.GetDensity());
+		Msg("BalloonTemp: %f", m_burner.GetTemperature());
 		Msg("\n");
 	}
 }

@@ -23,6 +23,7 @@ ADropTarget::ADropTarget() {
 
 	m_pDropTargetMeshComponent->OnComponentBeginOverlap.AddDynamic(this, &ADropTarget::OnOverlapBegin);
 	m_pDropTargetMeshComponent->OnComponentEndOverlap.AddDynamic(this, &ADropTarget::OnOverlapEnd);
+	
 }
 
 void ADropTarget::PreInit() {
@@ -32,11 +33,11 @@ void ADropTarget::PreInit() {
 }
 
 bool ADropTarget::isOverlapping(APickup* pPickup) {
-	FVector pickupLoc = pPickup->GetActorLocation();
-	FVector targetLoc = GetActorLocation();
-	targetLoc.Z = pickupLoc.Z = 0;
+	m_pickupLoc = pPickup->GetActorLocation();
+	m_targetLoc = GetActorLocation();
+	m_targetLoc.Z = m_pickupLoc.Z = 0;
 
-	bool result = ((targetLoc - pickupLoc).Size() < TARGET_HORIZONTAL_THRESH
+	bool result = ((m_targetLoc - m_pickupLoc).Size() < TARGET_HORIZONTAL_THRESH
 		&& fabsf(GetActorLocation().Z - pPickup->GetActorLocation().Z) < TARGET_VERTICAL_THRESH);
 
 	return result;
@@ -44,9 +45,18 @@ bool ADropTarget::isOverlapping(APickup* pPickup) {
 
 int ADropTarget::calculateScore(APickup* pPickup) {
 	Msg(__FUNCTION__);
+	int points = 0;
+	if ((m_pickupLoc - m_targetLoc).Size() < 20) {
+		points += 3;
+	}
+	else if ((m_pickupLoc - m_targetLoc).Size() < 40) {
+		points += 2;
+	}
+	else {
+		points += 1;
+	}
 
-
-	return 0;
+	return points;
 }
 
 void ADropTarget::ScoreThink(ADropTarget* vpDropTarget) {

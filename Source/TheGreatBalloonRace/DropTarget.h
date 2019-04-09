@@ -48,4 +48,8 @@ public:
 		void OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 	
 	static void ScoreThink(ADropTarget* vpDropTarget);
+	//public member variables
+public:
+	FVector m_pickupLoc;
+	FVector m_targetLoc;
 };

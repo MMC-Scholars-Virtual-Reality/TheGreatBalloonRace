@@ -1,20 +1,24 @@
 
 #include "HotAirBalloon.h"
 #include "System/NLogger.h"
-//set pointers in other classes to these objects
 AHotAirBalloon::AHotAirBalloon() {
 	m_BalloonMesh = CreateDefaultSubobject<UStaticMeshComponent>("m_BalloonMesh");
 	m_pBurnerController = CreateDefaultSubobject<ABurnerController>("m_pBurnerController");
 	m_pRudderController = CreateDefaultSubobject<ARudderController>("m_pRudderController");
 
 	m_ForceAccumulator.m_pBalloon = this;
-	m_pBurnerController->m_pBurner = &m_ForceAccumulator.m_burner;
-	m_pRudderController->m_pEngine = &m_ForceAccumulator.m_propellerEngine;
+	m_pBurnerController = NULL;
+	m_pRudderController = NULL;
 }
 
 void AHotAirBalloon::PreInit() {
 	m_velocity = FVector::ZeroVector; //sets velocity to 0
-	m_ForceAccumulator.m_burner.addEnergy(m_flStartingBalloonEnergy);
+	m_ForceAccumulator.m_burner.SetTemperature(m_flStartingBalloonEnergy);
+
+	if (m_pBurnerController)
+		m_pBurnerController->m_pBurner = &m_ForceAccumulator.m_burner;
+	if (m_pRudderController)
+		m_pRudderController->m_pEngine = &m_ForceAccumulator.m_propellerEngine;
 }
 
 void AHotAirBalloon::PostInit() {

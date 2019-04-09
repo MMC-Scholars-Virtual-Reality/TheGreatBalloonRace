@@ -38,9 +38,15 @@ public:
 	//private member variables
 private:
 	ForceAccumulator m_ForceAccumulator;
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	ABurnerController* m_pBurnerController;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	ARudderController* m_pRudderController;
 	
+private:
 	//Movement
 	FVector m_velocity;
 	void MoveThink(FVector acceleration);

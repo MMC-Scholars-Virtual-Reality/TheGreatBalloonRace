@@ -37,7 +37,6 @@ public:
 	* Returns a force in newtons to be applied to a ForceAccumulator
 	*
 	*/
-	//Incomplete
 	newtons getPropulsionStrength();
 	
 	

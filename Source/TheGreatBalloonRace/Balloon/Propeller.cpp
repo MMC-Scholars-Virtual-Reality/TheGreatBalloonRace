@@ -31,7 +31,7 @@ newtons Propeller::getPropulsionStrength()
 	height = m_pfAccum->getAircraftAltitude();
 	pressure = Atmosphere::getAirPressureAtAltitude(height);
 	m_nPropStrength = pressure * area;
-	
+
 	return m_nPropStrength;
 }
 //calculate rotational velocity based on energy, time, mass, and drag

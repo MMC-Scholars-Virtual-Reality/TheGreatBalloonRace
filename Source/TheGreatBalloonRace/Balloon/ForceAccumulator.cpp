@@ -80,6 +80,7 @@ void ForceAccumulator::forceReport() const {
 		Msg("AirPressure: %f", Atmosphere::getAirPressureAtAltitude(getAircraftAltitude()));
 		Msg("BalloonDensity: %f", m_burner.GetDensity());
 		Msg("BalloonTemp: %f", m_burner.GetTemperature());
+		//Msg("Propulsion: %f", m_propellerEngine.m_mainPropeller.getPropulsionStrength());
 		Msg("\n");
 	}
 }

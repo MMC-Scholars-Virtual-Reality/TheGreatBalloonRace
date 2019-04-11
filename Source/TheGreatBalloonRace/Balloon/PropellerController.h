@@ -3,18 +3,24 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "VRBase/ABaseMoving/ABaseMoving.h"
+#include "AMoveLinear/AMoveLinear.h"
 #include "PropellerController.generated.h"
+
+class PropellerEngine;
 
 /**
  * 
  */
 UCLASS()
-class THEGREATBALLOONRACE_API APropellerController : public ABaseMoving
+class THEGREATBALLOONRACE_API APropellerController : public AMoveLinear
 {
 	GENERATED_BODY()
-	
-	
+public:
+	APropellerController();
+
+	void DefaultThink() override;
+
+	PropellerEngine* m_pPropellerEngine;
 	
 	
 };

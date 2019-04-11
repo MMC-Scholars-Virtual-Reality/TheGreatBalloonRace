@@ -35,6 +35,7 @@ public:
 	//implemented
 	void addEnergy(joules jEnergy);
 
+	inline joules getEnergy() const { return m_jCurrentEnergy; }
 
 
 	/**

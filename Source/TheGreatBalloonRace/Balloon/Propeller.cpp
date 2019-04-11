@@ -1,6 +1,7 @@
 #include "Propeller.h"
 #include "ForceAccumulator.h"
 #include "Atmosphere.h"
+#include "System/Globals.h"
 
 Propeller::Propeller() {
 	m_iNumBlades = 3;
@@ -28,6 +29,10 @@ newtons Propeller::getPropulsionStrength() const
 //calculate rotational velocity based on energy, time, mass, and drag
 void Propeller::think()
 {
+	//decay energy over time
+	float drop = g_pGlobals->frametime;
+	m_jCurrentEnergy -= drop;
+
 	//Keep if numBlades is even
 	//if numblades is even - m_nInertia = m_iNumBlades * (1 / 12.0) * m_dMass * sqr(2 * m_flBladeRadius);
 	m_dRotationalVelo = (2 * m_jCurrentEnergy) / m_nInertia;

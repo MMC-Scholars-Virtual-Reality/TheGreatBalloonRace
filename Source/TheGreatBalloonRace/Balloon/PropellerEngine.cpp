@@ -72,7 +72,7 @@ void PropellerEngine::think(ForceAccumulator* pAccumulator) {
 	uint16 wishRPM = totalThrottle * 3000;
 	float fuelToConsume = 0.01f * m_pFuelTank->getFuelDensity();
 			//checks if there is enough fuel to consume and if so, consumes it
-	if (m_pFuelTank->canConsumeFuel(fuelToConsume)) {
+	/*if (m_pFuelTank->canConsumeFuel(fuelToConsume)) {
 		m_pFuelTank->consumeFuel(fuelToConsume);
 		float energy = fuelToConsume;
 		float energyMain = energy * m_lMainThrottle / (m_lMainThrottle + m_lRudderThrottle);
@@ -80,6 +80,7 @@ void PropellerEngine::think(ForceAccumulator* pAccumulator) {
 		m_rudderPropeller.addEnergy(energyRudder); //add energy to the rudder propeller
 		m_mainPropeller.addEnergy(energyMain); //add energy to the main propeller
 	}
+	*/
 	//ask each propeller how much thrust they are providing, get direction from m_mainPropellerDirection and m_rudderPropellerDirection
 	newtons mainThrust = m_mainPropeller.getPropulsionStrength();
 	newtons rudderThrust = m_rudderPropeller.getPropulsionStrength();
@@ -90,7 +91,8 @@ void PropellerEngine::think(ForceAccumulator* pAccumulator) {
 	mainDirection *= mainThrust;
 	rudderDirection.Normalize();
 	rudderDirection *= rudderThrust;
-	pAccumulator->addForce(Force{ Force::PROPULSION, mainDirection });
+	pAccumulator->addForce(Force{Force::PROPULSION, mainDirection});
+
 }
 
 

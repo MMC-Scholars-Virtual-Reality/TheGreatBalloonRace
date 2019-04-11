@@ -9,16 +9,22 @@ AHotAirBalloon::AHotAirBalloon() {
 	m_ForceAccumulator.m_pBalloon = this;
 	m_pBurnerController = NULL;
 	m_pRudderController = NULL;
+	m_ForceAccumulator.m_propellerEngine.m_mainPropeller.m_pfAccum = &m_ForceAccumulator;
+	m_ForceAccumulator.m_propellerEngine.m_rudderPropeller.m_pfAccum = &m_ForceAccumulator;
+
 }
 
 void AHotAirBalloon::PreInit() {
 	m_velocity = FVector::ZeroVector; //sets velocity to 0
-	m_ForceAccumulator.m_burner.SetTemperature(m_flStartingBalloonEnergy);
-
+	m_ForceAccumulator.m_burner.SetTemperature(m_flStartingBalloonTemperature);
+	m_ForceAccumulator.m_propellerEngine.m_mainPropeller.m_jCurrentEnergy = m_flStartingBalloonEnergy;
 	if (m_pBurnerController)
 		m_pBurnerController->m_pBurner = &m_ForceAccumulator.m_burner;
 	if (m_pRudderController)
 		m_pRudderController->m_pEngine = &m_ForceAccumulator.m_propellerEngine;
+
+	m_ForceAccumulator.m_propellerEngine.m_mainPropellerDirection = m_pPropellerDirection;
+	m_ForceAccumulator.m_propellerEngine.m_rudderPropellerDirection = m_pRudderDirection;
 }
 
 void AHotAirBalloon::PostInit() {

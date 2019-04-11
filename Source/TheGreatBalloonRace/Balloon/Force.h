@@ -7,7 +7,7 @@ struct Force {
 	Type of force
 	*/
 	enum EForceType : unsigned char {
-		PROPULSION = 0,
+		PROPULSION,
 		DRAG,
 		GRAVITY,
 		BUOYANCY,

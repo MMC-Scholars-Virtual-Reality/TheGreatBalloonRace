@@ -12,11 +12,11 @@ class ForceAccumulator;
 
 class PropellerEngine {
 	friend class ForceAccumulator;
+	friend class AHotAirBalloon;
 public:
 	// Constructor
 	PropellerEngine();
 public:
-	Propeller m_Propeller;
 /**
  * Private member variables
  */

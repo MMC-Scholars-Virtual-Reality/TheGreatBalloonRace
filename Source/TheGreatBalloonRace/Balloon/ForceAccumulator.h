@@ -10,6 +10,7 @@ class AHotAirBalloon;
 
 class ForceAccumulator {
 	friend class AHotAirBalloon;
+	
 public:
 
 	ForceAccumulator();
@@ -41,7 +42,4 @@ private:
 	PropellerEngine m_propellerEngine;
 	FuelTank m_fuelTank;
 	AHotAirBalloon* m_pBalloon;
-
-
-	
 };

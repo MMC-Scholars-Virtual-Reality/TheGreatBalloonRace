@@ -2,44 +2,34 @@
 #include "ForceAccumulator.h"
 #include "Atmosphere.h"
 
-
+Propeller::Propeller() {
+	m_iNumBlades = 3;
+	//m_dMass = 4;
+	m_flBladeRadius = 5;
+	m_nInertia = 1/3 * 4 * sqr(m_flBladeRadius);
+}
 void Propeller::addEnergy(joules jEnergy)
 {
 	m_jCurrentEnergy += jEnergy;
 }
 //get equation of prop strength based on rotational velocity, 
 //forces and parameters we can actually control
-newtons Propeller::getPropulsionStrength()
+newtons Propeller::getPropulsionStrength() const
 {
-	//double density; //air density
-	double area = 0; //area of the propeller disk
-	double exitV = 0; //the velocity of the air leaving the propeller
-	double aircraftV = 0; //the velocity of the aircraft
-	double pressure = 0; // air pressure
-	double density = 0; //density of the air normally 1.225 kg/m^3
-	double height = 0; //altitude of the aircraft
-
+	double area = PI * sqr(m_flBladeRadius); ; //area of the propeller disk
+	double height = m_pfAccum->getAircraftAltitude();;; //altitude of the aircraft
+	double pressure = Atmosphere::getAirPressureAtAltitude(height); // air pressure
 	//torque = rotational velocity^2, does not account for the other forces(blade pitch, etc)
 	//final dynamic thrust F = 4.392399x10^-8 * RPM diameter(in inches)^(3.5)/(sqrt(pitch(in inches)) * (4.23333x10^-4) * RPM * pitch(in inches) - V0(velocity of hot air balloon + wind velocity)
 	//final static thrust F = 1.225((pi(.0254 * d)^2)/4 * (RPM * 0.0245 * pitch(in inches) * 1min/60sec)^2 * (d/3.29546)^1.5
-	
-	//m_nPropStrength = m_dRotationalVelo * c;
-	//m_nPropStrength = .50 * density * area * (sqr(exitV) - sqr(aircraftV));
-	
 	//Thrust = pressure * area
-	area = PI * sqr(m_flBladeRadius); 
-	height = m_pfAccum->getAircraftAltitude();
-	pressure = Atmosphere::getAirPressureAtAltitude(height);
-	m_nPropStrength = pressure * area;
-
-	return m_nPropStrength;
+	return pressure * area;
 }
 //calculate rotational velocity based on energy, time, mass, and drag
 void Propeller::think()
 {
 	//Keep if numBlades is even
-	m_nInertia = m_iNumBlades * (1 / 12.0) * m_dMass * sqr(2 * m_flBladeRadius);
-	//USE IF NUMBLADES IS ODD - inertia = 1/3 * m_mass * sqr(r);
+	//if numblades is even - m_nInertia = m_iNumBlades * (1 / 12.0) * m_dMass * sqr(2 * m_flBladeRadius);
 	m_dRotationalVelo = (2 * m_jCurrentEnergy) / m_nInertia;
 
 	/*

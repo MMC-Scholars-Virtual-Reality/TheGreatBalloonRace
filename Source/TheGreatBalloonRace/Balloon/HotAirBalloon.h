@@ -33,6 +33,9 @@ public:
 		UStaticMeshComponent* m_BalloonMesh;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Physics Parameters")
+		float m_flStartingBalloonTemperature;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Physics Parameters")
 		float m_flStartingBalloonEnergy;
 
 	//private member variables
@@ -45,6 +48,12 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	ARudderController* m_pRudderController;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Physics Parameters")
+		ABaseEntity* m_pRudderDirection;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Physics Parameters")
+		ABaseEntity* m_pPropellerDirection;
 	
 private:
 	//Movement

@@ -17,8 +17,8 @@ void Propeller::addEnergy(joules jEnergy)
 //forces and parameters we can actually control
 newtons Propeller::getPropulsionStrength() const
 {
-	double area = PI * sqr(m_flBladeRadius); ; //area of the propeller disk
-	double height = m_pfAccum->getAircraftAltitude();;; //altitude of the aircraft
+	double area = PI * sqr(m_flBladeRadius); //area of the propeller disk
+	double height = m_pfAccum->getAircraftAltitude(); //altitude of the aircraft
 	double pressure = Atmosphere::getAirPressureAtAltitude(height); // air pressure
 	//torque = rotational velocity^2, does not account for the other forces(blade pitch, etc)
 	//final dynamic thrust F = 4.392399x10^-8 * RPM diameter(in inches)^(3.5)/(sqrt(pitch(in inches)) * (4.23333x10^-4) * RPM * pitch(in inches) - V0(velocity of hot air balloon + wind velocity)

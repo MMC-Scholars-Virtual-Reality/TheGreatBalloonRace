@@ -93,7 +93,6 @@ void PropellerEngine::think(ForceAccumulator* pAccumulator) {
 	rudderDirection.Normalize();
 	rudderDirection *= rudderThrust;
 	pAccumulator->addForce(Force{Force::PROPULSION, mainDirection});
-
 }
 
 

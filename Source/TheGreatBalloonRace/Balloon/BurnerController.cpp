@@ -13,6 +13,3 @@ void ABurnerController::DefaultThink() {
 	if (m_pBurner)
 		m_pBurner->SetThrottleLevel(GetLerpPosition());
 }
-
-
-

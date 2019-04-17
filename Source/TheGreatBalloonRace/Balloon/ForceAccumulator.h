@@ -18,6 +18,8 @@ public:
 	//Returns the atltitude of the aircraft
 	meters getAircraftAltitude() const;
 
+	void PreInit();
+
 	//Resets the forces on the aircraft
 	void reset();
 

@@ -28,6 +28,8 @@ public:
 	ForceAccumulator* m_pfAccum; 
 	
 	Propeller();
+
+	void PreInit();
 	
 	/*
 	* Adds energy to be converted into rotational energy of the propeller.

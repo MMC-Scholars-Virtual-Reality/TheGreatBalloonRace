@@ -4,12 +4,12 @@
 #include "PropellerEngine.h"
 
 APropellerController::APropellerController() {
-	m_pPropellerEngine = NULL;
+	m_pEngine = NULL;
 }
 
 void APropellerController::DefaultThink() {
 	Super::DefaultThink();
-	if (m_pPropellerEngine)
-		m_pPropellerEngine->setThrottle(GetLerpPosition(), EThrottle::THROTTLE_MAIN);
+	if (m_pEngine)
+		m_pEngine->setThrottle(GetLerpPosition(), EThrottle::THROTTLE_MAIN);
 }
 

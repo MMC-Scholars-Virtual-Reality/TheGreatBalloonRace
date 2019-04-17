@@ -20,11 +20,12 @@ void Burner::think() {
 
 	kelvin dt = m_Temperature - Atmosphere::getAirTemperatureAtAltitude(m_pForceAccumulator->getAircraftAltitude());
 	float time = min(g_pGlobals->frametime, 0.05f);
-	m_Temperature -= time * dt / 400;
+	m_Temperature -= time * dt / 100;
 
 	//add temperature based on our throttel level
 	//Msg("Adding %f", m_throttle * time);
-	m_Temperature += m_throttle * time;
+	m_Temperature += 10 * m_throttle * time / sqr(dt / 280);
+	
 
 	m_pForceAccumulator->addForce(Force{ Force::BUOYANCY, FVector(0,0,GetBuoyantForce()) });
 }

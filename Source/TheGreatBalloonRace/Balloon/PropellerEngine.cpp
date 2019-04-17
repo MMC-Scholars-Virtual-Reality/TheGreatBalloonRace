@@ -56,6 +56,12 @@ void PropellerEngine::setByGearIndepRPM(uint16 indepRPM) {
 	m_iCurrentGear = newGear;
 }
 
+void PropellerEngine::PreInit() {
+	m_mainPropeller.PreInit();
+	m_rudderPropeller.PreInit();
+	m_lMainThrottle = m_lRudderThrottle = 0;
+}
+
 //function that goes off every frame during the program
 void PropellerEngine::think(ForceAccumulator* pAccumulator) {
 	if (!m_mainPropellerDirection || !m_rudderPropellerDirection)
@@ -70,16 +76,18 @@ void PropellerEngine::think(ForceAccumulator* pAccumulator) {
 		totalThrottle = 1;
 	}
 	uint16 wishRPM = totalThrottle * 3000;
-	float fuelToConsume = 0.01f * m_pFuelTank->getFuelDensity();
+	float fuelToConsume = totalThrottle * g_pGlobals->frametime; // *m_pFuelTank->getFuelDensity();
 
 	//checks if there is enough fuel to consume and if so, consumes it
-	if (m_pFuelTank->canConsumeFuel(fuelToConsume)) {
+	if (true || m_pFuelTank->canConsumeFuel(fuelToConsume)) {
 		//m_pFuelTank->consumeFuel(fuelToConsume);
-		float energy = fuelToConsume * 100;
+		float energy = fuelToConsume / 100;
 		float energyMain = energy * m_lMainThrottle / (m_lMainThrottle + m_lRudderThrottle);
 		float energyRudder = energy - energyMain;
-		m_rudderPropeller.addEnergy(energyRudder); //add energy to the rudder propeller
-		m_mainPropeller.addEnergy(energyMain); //add energy to the main propeller
+		if (isnormal(energyRudder))
+			m_rudderPropeller.addEnergy(energyRudder); //add energy to the rudder propeller
+		if (isnormal(energyMain))
+			m_mainPropeller.addEnergy(energyMain); //add energy to the main propeller
 	}
 	
 	//ask each propeller how much thrust they are providing, get direction from m_mainPropellerDirection and m_rudderPropellerDirection

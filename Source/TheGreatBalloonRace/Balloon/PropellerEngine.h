@@ -69,6 +69,9 @@ private:
  * Public functions
  */
 public:
+
+	void PreInit();
+
 	//implemented
 	void setThrottle(lerp _flThrottle, EThrottle eThrottle);
 	

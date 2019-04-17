@@ -20,6 +20,10 @@ void ForceAccumulator::reset() {
 	m_forces.Empty(); //Empties the force vectors
 }
 
+void ForceAccumulator::PreInit() {
+	m_propellerEngine.PreInit();
+}
+
 FVector ForceAccumulator::getSummedForces() {
 	
 	float massOfBalloon = m_pBalloon->GetMass();

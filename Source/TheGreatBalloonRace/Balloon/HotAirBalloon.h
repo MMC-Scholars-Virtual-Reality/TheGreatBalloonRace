@@ -8,6 +8,7 @@
 #include "Burner.h"
 #include "Propeller.h"
 #include "BurnerController.h"
+#include "PropellerController.h"
 #include "RudderController.h"
 #include "HotAirBalloon.generated.h"
 
@@ -44,10 +45,13 @@ private:
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
-	ABurnerController* m_pBurnerController;
+		ABurnerController* m_pBurnerController;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
-	ARudderController* m_pRudderController;
+		APropellerController* m_pPropellerController;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+		ARudderController* m_pRudderController;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Physics Parameters")
 		ABaseEntity* m_pRudderDirection;

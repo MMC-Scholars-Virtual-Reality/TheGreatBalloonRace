@@ -20,7 +20,7 @@ public:
 
 	void DefaultThink() override;
 
-	PropellerEngine* m_pPropellerEngine;
+	PropellerEngine* m_pEngine;
 	
 	
 };

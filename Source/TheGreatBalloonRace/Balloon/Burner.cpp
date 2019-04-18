@@ -6,8 +6,8 @@
 
 
 
-Burner::Burner(const float _BalloonRadius, const float _temperature) {
-	m_Temperature = _temperature;
+Burner::Burner(const float _BalloonRadius) {
+	m_Temperature = 0;
 	m_Volume = (4 / 3) * PI * sqr(_BalloonRadius) * _BalloonRadius;
 }
 

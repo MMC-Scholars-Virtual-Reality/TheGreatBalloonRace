@@ -27,7 +27,7 @@ private:
 
 
 public:
-	Burner(const float _BalloonRadius, const float _temperature);
+	Burner(const float _BalloonRadius);
 
 	//Called on each frame
 	//Based on the throttle level, consumes an amount of fuel from the fueltank
@@ -39,6 +39,7 @@ public:
 
 	//Given a throttle level sets the throttle to the given level
 	void SetThrottleLevel(lerp _throttle);
+	lerp GetThrottleLevel() const { return m_throttle; }
 
 	//Gets the mass of the air inside the balloon
 	kilos GetAirMass() const;

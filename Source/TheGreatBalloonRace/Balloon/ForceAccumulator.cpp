@@ -5,7 +5,7 @@
 #include "Atmosphere.h"
 #include "predefs.h"
 
-ForceAccumulator::ForceAccumulator() : m_burner(5, 1000) {
+ForceAccumulator::ForceAccumulator() : m_burner(5) {
 	m_pBalloon = NULL;
 	m_burner.m_pFuelTank = &m_fuelTank;
 	m_burner.m_pForceAccumulator = this;
@@ -79,12 +79,13 @@ void ForceAccumulator::forceReport() const {
 		FVector v = m_pBalloon->GetVelocity();
 		Msg("Velocity: (%f, %f, %f) m/s", v.X, v.Y, v.Z);
 		Msg("Mass: %fkg", m_pBalloon->GetMass());
-		Msg("AirDensity: %f", Atmosphere::getAirDensityAtAltitude(getAircraftAltitude()));
-		Msg("AirTemperature: %f", Atmosphere::getAirTemperatureAtAltitude(getAircraftAltitude()));
-		Msg("AirPressure: %f", Atmosphere::getAirPressureAtAltitude(getAircraftAltitude()));
+		//Msg("AirDensity: %f", Atmosphere::getAirDensityAtAltitude(getAircraftAltitude()));
+		//Msg("AirTemperature: %f", Atmosphere::getAirTemperatureAtAltitude(getAircraftAltitude()));
+		//Msg("AirPressure: %f", Atmosphere::getAirPressureAtAltitude(getAircraftAltitude()));
+		Msg("Burner Throttle %f", m_burner.GetThrottleLevel());
 		Msg("BalloonDensity: %f", m_burner.GetDensity());
 		Msg("BalloonTemp: %f", m_burner.GetTemperature());
-		Msg("Current Energy: %f", m_propellerEngine.m_mainPropeller.m_jCurrentEnergy);
+		Msg("Current Engine Energy: %f", m_propellerEngine.m_mainPropeller.m_jCurrentEnergy);
 		Msg("Propulsion: %f", m_propellerEngine.m_mainPropeller.getPropulsionStrength());
 		Msg("\n");
 	}

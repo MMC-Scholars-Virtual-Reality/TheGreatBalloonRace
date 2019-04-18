@@ -81,7 +81,7 @@ void PropellerEngine::think(ForceAccumulator* pAccumulator) {
 	//checks if there is enough fuel to consume and if so, consumes it
 	if (true || m_pFuelTank->canConsumeFuel(fuelToConsume)) {
 		//m_pFuelTank->consumeFuel(fuelToConsume);
-		float energy = fuelToConsume / 100;
+		float energy = fuelToConsume / 2;
 		float energyMain = energy * m_lMainThrottle / (m_lMainThrottle + m_lRudderThrottle);
 		float energyRudder = energy - energyMain;
 		if (isnormal(energyRudder))

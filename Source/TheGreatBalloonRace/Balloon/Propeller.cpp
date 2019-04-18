@@ -10,14 +10,14 @@ Propeller::Propeller() {
 	//m_dMass = 4;
 	m_flBladeRadius = 5;
 	m_nInertia = 1/3 * 4 * sqr(m_flBladeRadius);
-	m_jCurrentEnergy = 1;
+	m_jCurrentEnergy = 0;
 }
 void Propeller::addEnergy(joules jEnergy)
 {
 	if (m_jCurrentEnergy < 0)
 		return;
 	if (m_jCurrentEnergy && m_jCurrentEnergy > 1)
-		m_jCurrentEnergy += jEnergy / max(sqr(m_jCurrentEnergy * 100), 1);
+		m_jCurrentEnergy += jEnergy; // / max(sqr(m_jCurrentEnergy), 1);
 	else
 		m_jCurrentEnergy += jEnergy;
 	if (m_jCurrentEnergy > 10)
@@ -39,7 +39,7 @@ newtons Propeller::getPropulsionStrength() const
 }
 
 void Propeller::PreInit() {
-	m_jCurrentEnergy = 50;
+	m_jCurrentEnergy = 0;
 	m_dRotationalVelo = 0;
 }
 
@@ -48,7 +48,7 @@ void Propeller::think()
 {
 	//decay energy over time
 	float drop = g_pGlobals->frametime;
-	m_jCurrentEnergy -= drop / 2;
+	m_jCurrentEnergy -= drop / 10;
 	if (m_jCurrentEnergy < 0.001f)
 		m_jCurrentEnergy = 0.001f;
 

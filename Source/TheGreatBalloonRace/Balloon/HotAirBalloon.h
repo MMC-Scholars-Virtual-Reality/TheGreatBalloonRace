@@ -39,6 +39,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Physics Parameters")
 		float m_flStartingBalloonEnergy;
 
+
+
+
 	//private member variables
 private:
 	ForceAccumulator m_ForceAccumulator;

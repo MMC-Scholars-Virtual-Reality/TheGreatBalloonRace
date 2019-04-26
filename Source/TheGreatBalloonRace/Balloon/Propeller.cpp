@@ -14,15 +14,14 @@ Propeller::Propeller() {
 }
 void Propeller::addEnergy(joules jEnergy)
 {
-	if (m_jCurrentEnergy < 0)
-		return;
+	if (m_jCurrentEnergy < 0.001f)
+		m_jCurrentEnergy = 0.001f;
 	if (m_jCurrentEnergy && m_jCurrentEnergy > 1)
 		m_jCurrentEnergy += jEnergy; // / max(sqr(m_jCurrentEnergy), 1);
 	else
 		m_jCurrentEnergy += jEnergy;
 	if (m_jCurrentEnergy > 10)
 		m_jCurrentEnergy = 10;
-
 }
 //get equation of prop strength based on rotational velocity, 
 //forces and parameters we can actually control
@@ -35,11 +34,11 @@ newtons Propeller::getPropulsionStrength() const
 	//final dynamic thrust F = 4.392399x10^-8 * RPM diameter(in inches)^(3.5)/(sqrt(pitch(in inches)) * (4.23333x10^-4) * RPM * pitch(in inches) - V0(velocity of hot air balloon + wind velocity)
 	//final static thrust F = 1.225((pi(.0254 * d)^2)/4 * (RPM * 0.0245 * pitch(in inches) * 1min/60sec)^2 * (d/3.29546)^1.5
 	//Thrust = pressure * area
-	return pressure * area * m_jCurrentEnergy;
+	return pressure * area * 2 * sqrtf(m_jCurrentEnergy);
 }
 
 void Propeller::PreInit() {
-	m_jCurrentEnergy = 0;
+	//m_jCurrentEnergy = 0;
 	m_dRotationalVelo = 0;
 }
 
@@ -47,11 +46,12 @@ void Propeller::PreInit() {
 void Propeller::think()
 {
 	//decay energy over time
-	float drop = g_pGlobals->frametime;
-	m_jCurrentEnergy -= drop / 10;
+	float drop = g_pGlobals->frametime * (1 + log10f(max(1,m_jCurrentEnergy)));
+	//Msg("DROP: %f", drop);
+	m_jCurrentEnergy -= drop;
 	if (m_jCurrentEnergy < 0.001f)
 		m_jCurrentEnergy = 0.001f;
-
+		
 	//Keep if numBlades is even
 	//if numblades is even - m_nInertia = m_iNumBlades * (1 / 12.0) * m_dMass * sqr(2 * m_flBladeRadius);
 	m_dRotationalVelo = (2 * m_jCurrentEnergy) / m_nInertia;

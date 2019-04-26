@@ -15,10 +15,13 @@ AHotAirBalloon::AHotAirBalloon() {
 
 }
 
+#define max(a,b) ((a)<(b)?(b):(a))
 void AHotAirBalloon::PreInit() {
 	m_velocity = FVector::ZeroVector; //sets velocity to 0
 	m_ForceAccumulator.m_burner.SetTemperature(m_flStartingBalloonTemperature);
-	m_ForceAccumulator.m_propellerEngine.m_mainPropeller.m_jCurrentEnergy = m_flStartingBalloonEnergy;
+	float startingEnergy = max(0.001f, m_flStartingBalloonEnergy);
+	m_ForceAccumulator.m_propellerEngine.m_mainPropeller.m_jCurrentEnergy = startingEnergy;
+	
 	if (m_pBurnerController)
 		m_pBurnerController->m_pBurner = &m_ForceAccumulator.m_burner;
 	if (m_pPropellerController)
@@ -60,4 +63,10 @@ void AHotAirBalloon::MoveThink(FVector acceleration) {
 	//our velocity is m/s, but Unreal world units are cm
 	FVector dp = m_velocity * 100 * g_pGlobals->frametime;
 	AddActorLocalOffset(dp);
+
+	if (GetActorLocation().Z < 0) {
+		FVector loc = GetActorLocation();
+		loc.Z = 0;
+		SetActorLocation(loc);
+	}
 }

@@ -32,7 +32,7 @@ struct Force {
 
 		FString result = pre;
 		char buffer[64];
-		sprintf_s(buffer, " (%.2f, %.2f, %.2f)", m_vector.X, m_vector.Z, m_vector.Y);
+		sprintf_s(buffer, " (%.2f, %.2f, %.2f)", m_vector.X, m_vector.Y, m_vector.Z);
 		result += buffer;
 		return result;
 	}

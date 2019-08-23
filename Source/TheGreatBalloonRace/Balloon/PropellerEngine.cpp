@@ -67,7 +67,6 @@ void PropellerEngine::think(ForceAccumulator* pAccumulator) {
 	if (!m_mainPropellerDirection || !m_rudderPropellerDirection)
 		return;
 
-
 	m_mainPropeller.think();
 	m_rudderPropeller.think();
 	playEngineSound();
@@ -80,10 +79,23 @@ void PropellerEngine::think(ForceAccumulator* pAccumulator) {
 	//checks if there is enough fuel to consume and if so, consumes it
 	if ((true || m_pFuelTank->canConsumeFuel(fuelToConsume)) && totalThrottle > 0.01f) {
 		//m_pFuelTank->consumeFuel(fuelToConsume);
+		
 		float energy = fuelToConsume * 2;
 		float energyMain = energy * m_lMainThrottle / (totalThrottle);
-		//Msg("Total Throttle: %f", totalThrottle);
 		float energyRudder = energy - energyMain;
+		//Msg("Total Throttle: %f", totalThrottle);
+
+		//Only adds energy if the throttles are on. If they aren't, then the energy decays
+		if (THROTTLE_MAIN > 0) {
+			energyMain += energyMain;
+		}
+		else if (THROTTLE_RUDDER > 0) {
+			energyRudder += energyRudder;
+		}
+		else {
+			energy -= 10;
+		}
+
 		if (isnormal(energyRudder)){
 			m_rudderPropeller.addEnergy(energyRudder); //add energy to the rudder propeller
 		}

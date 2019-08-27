@@ -87,12 +87,16 @@ void PropellerEngine::think(ForceAccumulator* pAccumulator) {
 
 		//Only adds energy if the throttles are on. If they aren't, then the energy decays
 		if (THROTTLE_MAIN > 0) {
+			m_mainPropeller.addEnergy(energyMain);
 			energyMain += energyMain;
 		}
 		else if (THROTTLE_RUDDER > 0) {
+			m_rudderPropeller.addEnergy(energyRudder);
 			energyRudder += energyRudder;
 		}
 		else {
+			m_mainPropeller.addEnergy(-10);
+			m_rudderPropeller.addEnergy(-10);
 			energy -= 10;
 		}
 

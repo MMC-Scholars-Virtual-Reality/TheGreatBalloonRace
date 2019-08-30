@@ -3,7 +3,7 @@
 #include "Atmosphere.h"
 #include "System/Globals.h"
 
-//#define max(a,b) ((a) < (b) ? (a) : (b))
+#define max(a,b) ((a) < (b) ? (a) : (b))
 
 Propeller::Propeller() {
 	m_iNumBlades = 3;
@@ -20,8 +20,9 @@ void Propeller::addEnergy(joules jEnergy)
 		m_jCurrentEnergy += jEnergy; // / max(sqr(m_jCurrentEnergy), 1);
 	else
 		m_jCurrentEnergy += jEnergy;
-	if (m_jCurrentEnergy > 10)
+	/*if (m_jCurrentEnergy > 10)
 		m_jCurrentEnergy = 10;
+		*/
 }
 //get equation of prop strength based on rotational velocity, 
 //forces and parameters we can actually control

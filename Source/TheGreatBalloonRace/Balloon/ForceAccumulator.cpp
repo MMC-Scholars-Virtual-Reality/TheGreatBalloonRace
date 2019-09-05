@@ -87,6 +87,7 @@ void ForceAccumulator::forceReport() const {
 		Msg("BalloonTemp: %f", m_burner.GetTemperature());
 		Msg("Current Engine Energy: %f", m_propellerEngine.m_mainPropeller.m_jCurrentEnergy);
 		Msg("Propulsion: %f", m_propellerEngine.m_mainPropeller.getPropulsionStrength());
+		Msg("Rudder Throttle: %f", m_propellerEngine.m_rudderPropeller.
 		Msg("\n");
 	}
 }

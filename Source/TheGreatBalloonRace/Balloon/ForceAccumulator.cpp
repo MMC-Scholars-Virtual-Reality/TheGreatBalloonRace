@@ -75,7 +75,6 @@ void ForceAccumulator::forceReport() const {
 		for (int32 i = 0; i < m_forces.Num(); i++) {
 			Msg(m_forces[i].getAsString());
 		}
-
 		FVector v = m_pBalloon->GetVelocity();
 		Msg("Velocity: (%f, %f, %f) m/s", v.X, v.Y, v.Z);
 		Msg("Mass: %fkg", m_pBalloon->GetMass());
@@ -87,7 +86,9 @@ void ForceAccumulator::forceReport() const {
 		Msg("BalloonTemp: %f", m_burner.GetTemperature());
 		Msg("Current Engine Energy: %f", m_propellerEngine.m_mainPropeller.m_jCurrentEnergy);
 		Msg("Propulsion: %f", m_propellerEngine.m_mainPropeller.getPropulsionStrength());
-		Msg("Rudder Throttle: %f", m_propellerEngine.m_rudderPropeller.
+		Msg("Main Throttle: %f", m_propellerEngine.m_lMainThrottle);
+		Msg("Rudder Throttle: %f", m_propellerEngine.m_lRudderThrottle);
+		Msg("Burner Throttle: %f", m_burner.GetThrottleLevel());
 		Msg("\n");
 	}
 }

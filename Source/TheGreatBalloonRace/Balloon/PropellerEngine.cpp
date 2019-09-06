@@ -86,7 +86,7 @@ void PropellerEngine::think(ForceAccumulator* pAccumulator) {
 		//Msg("Total Throttle: %f", totalThrottle);
 
 		//Only adds energy if the throttles are on. If they aren't, then the energy decays
-		if (THROTTLE_MAIN > 0) {
+		/*if (THROTTLE_MAIN > 0) {
 			m_mainPropeller.addEnergy(energyMain);
 			energyMain += energyMain;
 		}
@@ -98,7 +98,7 @@ void PropellerEngine::think(ForceAccumulator* pAccumulator) {
 			m_mainPropeller.addEnergy(-10);
 			m_rudderPropeller.addEnergy(-10);
 			energy -= 10;
-		}
+		}*/
 
 		if (isnormal(energyRudder)){
 			m_rudderPropeller.addEnergy(energyRudder); //add energy to the rudder propeller
@@ -110,6 +110,7 @@ void PropellerEngine::think(ForceAccumulator* pAccumulator) {
 	
 	//ask each propeller how much thrust they are providing, get direction from m_mainPropellerDirection and m_rudderPropellerDirection
 	newtons mainThrust = m_mainPropeller.getPropulsionStrength();
+	//Msg("%f", mainThrust);
 	newtons rudderThrust = m_rudderPropeller.getPropulsionStrength();
 	FVector mainDirection = m_mainPropellerDirection->GetActorForwardVector();
 	FVector rudderDirection = m_rudderPropellerDirection->GetActorForwardVector();

@@ -15,7 +15,7 @@ Propeller::Propeller() {
 void Propeller::addEnergy(joules jEnergy)
 {
 	if (m_jCurrentEnergy < 0.001f)
-		m_jCurrentEnergy = 0.001f;
+		m_jCurrentEnergy = 0.f;
 	if (m_jCurrentEnergy && m_jCurrentEnergy > 1)
 		m_jCurrentEnergy += jEnergy; // / max(sqr(m_jCurrentEnergy), 1);
 	else
@@ -51,7 +51,7 @@ void Propeller::think()
 	//Msg("DROP: %f", drop);
 	m_jCurrentEnergy -= drop;
 	if (m_jCurrentEnergy < 0.001f)
-		m_jCurrentEnergy = 0.001f;
+		m_jCurrentEnergy = 0.f;
 		
 	//Keep if numBlades is even
 	//if numblades is even - m_nInertia = m_iNumBlades * (1 / 12.0) * m_dMass * sqr(2 * m_flBladeRadius);

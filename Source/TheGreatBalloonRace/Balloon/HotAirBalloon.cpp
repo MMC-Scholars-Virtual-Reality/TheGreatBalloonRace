@@ -19,8 +19,8 @@ AHotAirBalloon::AHotAirBalloon() {
 void AHotAirBalloon::PreInit() {
 	m_velocity = FVector::ZeroVector; //sets velocity to 0
 	m_ForceAccumulator.m_burner.SetTemperature(m_flStartingBalloonTemperature);
-	float startingEnergy = max(0.001f, m_flStartingBalloonEnergy);
-	m_ForceAccumulator.m_propellerEngine.m_mainPropeller.m_jCurrentEnergy = startingEnergy;
+	//float startingEnergy = max(0.001f, m_flStartingBalloonEnergy);
+	//m_ForceAccumulator.m_propellerEngine.m_mainPropeller.m_jCurrentEnergy = startingEnergy;
 	
 	if (m_pBurnerController)
 		m_pBurnerController->m_pBurner = &m_ForceAccumulator.m_burner;

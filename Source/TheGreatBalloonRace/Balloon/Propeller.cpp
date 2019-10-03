@@ -3,7 +3,7 @@
 #include "Atmosphere.h"
 #include "System/Globals.h"
 
-#define max(a,b) ((a) < (b) ? (a) : (b))
+// #define max(a,b) ((a) < (b) ? (a) : (b))
 
 Propeller::Propeller() {
 	m_iNumBlades = 3;

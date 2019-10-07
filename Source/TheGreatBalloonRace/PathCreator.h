@@ -14,5 +14,6 @@ class THEGREATBALLOONRACE_API APathCreator : public ABaseEntity {
 	public:
 		APathCreator();
 
+		UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Spline", DisplayName = "Spline")
 		USplineComponent* m_pSpline;
 };

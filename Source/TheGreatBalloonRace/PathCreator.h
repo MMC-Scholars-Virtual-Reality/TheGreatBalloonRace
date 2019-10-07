@@ -5,15 +5,23 @@
 #include "CoreMinimal.h"
 #include "VRBase/ABaseEntity/ABaseEntity.h"
 #include "Components/SplineComponent.h"
+#include "Components/SplineMeshComponent.h"
+#include "System/NLogger.h"
 #include "PathCreator.generated.h"
 
 UCLASS()
 class THEGREATBALLOONRACE_API APathCreator : public ABaseEntity {
 	GENERATED_BODY()
-	
+
 	public:
 		APathCreator();
+		virtual void OnConstruction(const FTransform& Transform) override;
 
-		UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Spline", DisplayName = "Spline")
 		USplineComponent* m_pSpline;
+
+		UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Spline", DisplayName = "Mesh")
+		UStaticMesh* m_pSplineMesh;
+
+		UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Spline", DisplayName = "Mesh Forward Dir")
+		TEnumAsByte<ESplineMeshAxis::Type> m_pSplineForward;
 };

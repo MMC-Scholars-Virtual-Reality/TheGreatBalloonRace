@@ -58,7 +58,7 @@ void ForceAccumulator::addForce(const Force& F) {
 		m_forces.Add(F);
 	}
 	else {
-		NLogger::Warning("In" __FUNCTION__ "Recieved duplicate of type.");
+		NLogger::Warning("In" __FUNCTION__ "Received duplicate of type.");
 	}
 }
 
@@ -72,6 +72,7 @@ void ForceAccumulator::forceReport() const {
 	frameCounter++;
 	if (frameCounter == 100) {
 		frameCounter = 0;
+		/*
 		for (int32 i = 0; i < m_forces.Num(); i++) {
 			Msg(m_forces[i].getAsString());
 		}
@@ -90,5 +91,6 @@ void ForceAccumulator::forceReport() const {
 		Msg("Rudder Throttle: %f", m_propellerEngine.m_lRudderThrottle);
 		Msg("Burner Throttle: %f", m_burner.GetThrottleLevel());
 		Msg("\n");
+		*/
 	}
 }

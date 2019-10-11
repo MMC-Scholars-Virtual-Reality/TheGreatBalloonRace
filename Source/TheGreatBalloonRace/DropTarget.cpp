@@ -28,7 +28,7 @@ ADropTarget::ADropTarget() {
 
 void ADropTarget::PreInit() {
 	Super::PreInit();
-	Msg("preinit");
+//	Msg("preinit");
 	SetThink(&ADropTarget::ScoreThink);
 }
 
@@ -44,7 +44,7 @@ bool ADropTarget::isOverlapping(APickup* pPickup) {
 }
 
 int ADropTarget::calculateScore(APickup* pPickup) {
-	Msg(__FUNCTION__);
+//	Msg(__FUNCTION__);
 	int points = 0;
 	if ((m_pickupLoc - m_targetLoc).Size() < 20) {
 		points += 3;
@@ -76,10 +76,10 @@ void ADropTarget::ScoreThink(ADropTarget* vpDropTarget) {
 
 
 void ADropTarget::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
-	Msg(__FUNCTION__);
+//	Msg(__FUNCTION__);
 }
 
 void ADropTarget::OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex) {
-	Msg(__FUNCTION__);
+//	Msg(__FUNCTION__);
 }
 

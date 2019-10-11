@@ -3,15 +3,19 @@
 #include "PathCreator.h"
 #include "System/NLogger.h"
 
-#define MESH "StaticMesh'/Game/Models/Spline.Spline'"
+#define SPLINE_MESH "StaticMesh'/Game/Models/Spline.Spline'"
+#define RING_MESH "StaticMesh'/Game/Models/Ring.Ring'"
 #define MESH_AXIS ESplineMeshAxis::Type(ESplineMeshAxis::Z)
 
 APathCreator::APathCreator() {
 	m_pSpline = CreateDefaultSubobject<USplineComponent>("spline");
 	RootComponent = m_pSpline;
 
-	m_pSplineMesh = FindMesh(MESH);
+	m_pSplineMesh = FindMesh(SPLINE_MESH);
+	m_pRingMesh = FindMesh(RING_MESH);
 	m_pSplineForward = MESH_AXIS;
+
+	m_uScore = 0;
 }
 
 void APathCreator::OnConstruction(const FTransform& Transform) {

@@ -19,9 +19,16 @@ class THEGREATBALLOONRACE_API APathCreator : public ABaseEntity {
 
 		USplineComponent* m_pSpline;
 
-		UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Spline", DisplayName = "Mesh")
+		UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Spline", DisplayName = "Spline")
 		UStaticMesh* m_pSplineMesh;
-
+		UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Spline", DisplayName = "Ring")
+		UStaticMesh* m_pRingMesh;
 		UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Spline", DisplayName = "Mesh Forward Dir")
 		TEnumAsByte<ESplineMeshAxis::Type> m_pSplineForward;
+
+	private:
+		uint m_uScore;
+	
+	public:
+		uint getScore() { return m_uScore; };
 };

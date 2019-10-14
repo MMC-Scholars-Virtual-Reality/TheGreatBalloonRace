@@ -6,6 +6,7 @@
 #include "VRBase/ABaseEntity/ABaseEntity.h"
 #include "Components/SplineComponent.h"
 #include "Components/SplineMeshComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "System/NLogger.h"
 #include "PathCreator.generated.h"
 

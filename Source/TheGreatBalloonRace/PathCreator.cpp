@@ -53,7 +53,9 @@ void APathCreator::OnConstruction(const FTransform& Transform) {
 
 		pRingMeshComponent->SetWorldLocation(eLoc);
 		pRingMeshComponent->AttachToComponent(pSplineMeshComponent, FAttachmentTransformRules::KeepRelativeTransform);
-		// TODO refined location, rotation and scale
+		pRingMeshComponent->SetWorldRotation(eTan.Rotation());
+		vec scale = 1.2;
+		pRingMeshComponent->SetWorldScale3D(FVector(scale, scale, scale));
 	}
 
 }

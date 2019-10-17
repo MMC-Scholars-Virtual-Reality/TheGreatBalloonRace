@@ -1,6 +1,7 @@
 // This software is under partial ownership by The Ohio State University, for it is a product of student employees. For official policy, see https://tco.osu.edu/sites/default/files/pdfs/IP-Policy.pdf or contact The Ohio State University Office of Legal Affairs.
 
 #include "PathCreator.h"
+#include "PathRing.h"
 #include "System/NLogger.h"
 
 #define SPLINE_MESH "StaticMesh'/Game/Models/Spline.Spline'"
@@ -43,19 +44,16 @@ void APathCreator::OnConstruction(const FTransform& Transform) {
 
 		pSplineMeshComponent->SetStartAndEnd(sLoc, sTan, eLoc, eTan);
 
-		// ring mesh
+		// ring actor
 
-		UStaticMeshComponent* pRingMeshComponent = NewObject<UStaticMeshComponent>(this, UStaticMeshComponent::StaticClass());
-		pRingMeshComponent->RegisterComponentWithWorld(GetWorld());
-		pRingMeshComponent->CreationMethod = EComponentCreationMethod::UserConstructionScript;
+		UChildActorComponent* pRingActor = NewObject<UChildActorComponent>(this, UChildActorComponent::StaticClass());
+		pRingActor->RegisterComponentWithWorld(GetWorld());
+		pRingActor->CreationMethod = EComponentCreationMethod::UserConstructionScript;
+		pRingActor->SetChildActorClass(APathRing::StaticClass());
 
-		pRingMeshComponent->SetStaticMesh(m_pRingMesh);
-
-		pRingMeshComponent->SetWorldLocation(eLoc);
-		pRingMeshComponent->AttachToComponent(pSplineMeshComponent, FAttachmentTransformRules::KeepRelativeTransform);
-		pRingMeshComponent->SetWorldRotation(eTan.Rotation());
-		vec scale = 1.2;
-		pRingMeshComponent->SetWorldScale3D(FVector(scale, scale, scale));
+		pRingActor->SetWorldLocation(eLoc);
+		pRingActor->AttachToComponent(pSplineMeshComponent, FAttachmentTransformRules::KeepRelativeTransform);
+		pRingActor->SetWorldRotation(eTan.Rotation());
 	}
 
 }

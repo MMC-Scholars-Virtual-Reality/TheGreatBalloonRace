@@ -10,7 +10,7 @@ APropellerController::APropellerController() {
 
 void APropellerController::DefaultThink() {
 	Super::DefaultThink();
-	Msg("PropellerController lerp position is %f", GetLerpPosition());
+//	Msg("PropellerController lerp position is %f", GetLerpPosition());
 	if (m_pEngine)
 		m_pEngine->setThrottle(GetLerpPosition(), EThrottle::THROTTLE_MAIN);
 }

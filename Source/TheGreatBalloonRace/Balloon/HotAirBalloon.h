@@ -1,3 +1,5 @@
+// This software is under partial ownership by The Ohio State University, for it is a product of student employees. For official policy, see https://tco.osu.edu/sites/default/files/pdfs/IP-Policy.pdf or contact The Ohio State University's Office of Legal Affairs.
+
 #pragma once
 
 #include "CoreMinimal.h"
@@ -12,14 +14,12 @@
 #include "RudderController.h"
 #include "HotAirBalloon.generated.h"
 
-/**
- * 
- */
 UCLASS()
-class THEGREATBALLOONRACE_API AHotAirBalloon : public ABaseEntity
-{
+class THEGREATBALLOONRACE_API AHotAirBalloon : public ABaseEntity {
 	GENERATED_BODY()
-	//public member functions
+	
+		//public member functions
+
 public:	
 	AHotAirBalloon();
 	void PreInit() override;
@@ -31,16 +31,13 @@ public:
 	//public member variables
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Static Mesh")
-		UStaticMeshComponent* m_BalloonMesh;
+		UStaticMeshComponent* m_pBalloonMesh;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Physics Parameters")
 		float m_flStartingBalloonTemperature;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Physics Parameters")
 		float m_flStartingBalloonEnergy;
-
-
-
 
 	//private member variables
 private:

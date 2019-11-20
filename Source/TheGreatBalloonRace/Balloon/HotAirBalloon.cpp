@@ -2,7 +2,8 @@
 #include "HotAirBalloon.h"
 #include "System/NLogger.h"
 AHotAirBalloon::AHotAirBalloon() {
-	m_BalloonMesh = CreateDefaultSubobject<UStaticMeshComponent>("m_BalloonMesh");
+	m_pBalloonMesh = CreateDefaultSubobject<UStaticMeshComponent>("m_BalloonMesh");
+	RootComponent = m_pBalloonMesh;
 	m_pBurnerController = CreateDefaultSubobject<ABurnerController>("m_pBurnerController");
 	m_pRudderController = CreateDefaultSubobject<ARudderController>("m_pRudderController");
 

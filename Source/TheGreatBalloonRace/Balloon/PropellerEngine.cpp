@@ -7,6 +7,7 @@
 #include "AGameRules/AGameRules.h"
 #include "GameFramework/Actor.h"
 #include "Kismet/GameplayStatics.h"
+#include "System/NLogger.h"
 
 
 //default constructor
@@ -114,6 +115,9 @@ void PropellerEngine::think(ForceAccumulator* pAccumulator) {
 	newtons rudderThrust = m_rudderPropeller.getPropulsionStrength();
 	FVector mainDirection = m_mainPropellerDirection->GetActorForwardVector();
 	FVector rudderDirection = m_rudderPropellerDirection->GetActorForwardVector();
+	
+	Msg(rudderDirection);
+
 	//makes the magnitude of main and rudder direction to be equal to the thrust, then sends the force to the force accumulator
 	mainDirection.Normalize();
 	mainDirection *= mainThrust;

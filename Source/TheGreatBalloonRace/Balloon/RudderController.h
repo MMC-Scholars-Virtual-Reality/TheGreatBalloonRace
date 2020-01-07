@@ -7,21 +7,14 @@
 #include "predefs.h"
 #include "RudderController.generated.h"
 
-
-
-/**
- * 
- */
 UCLASS()
-class THEGREATBALLOONRACE_API ARudderController : public AMoveLinear
-{
+class THEGREATBALLOONRACE_API ARudderController : public AMoveLinear {
 	GENERATED_BODY()
-//public member functions
+
 public:
 	ARudderController();
 	void DefaultThink() override;
 
-//public member variables
 public:
 	PropellerEngine* m_pEngine; 
 

@@ -116,7 +116,8 @@ void PropellerEngine::think(ForceAccumulator* pAccumulator) {
 	FVector mainDirection = m_mainPropellerDirection->GetActorForwardVector();
 	FVector rudderDirection = m_rudderPropellerDirection->GetActorForwardVector();
 	
-	Msg(rudderDirection);
+	//Msg("Rudder direction: %f, %f, %f", rudderDirection.X, rudderDirection.Y, rudderDirection.Z);
+
 
 	//makes the magnitude of main and rudder direction to be equal to the thrust, then sends the force to the force accumulator
 	mainDirection.Normalize();

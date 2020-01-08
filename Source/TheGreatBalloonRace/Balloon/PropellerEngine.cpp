@@ -9,8 +9,6 @@
 #include "Kismet/GameplayStatics.h"
 #include "System/NLogger.h"
 
-
-//default constructor
 PropellerEngine::PropellerEngine() {
 	m_pFuelTank = NULL;
 	m_mainPropellerDirection = NULL;
@@ -111,14 +109,10 @@ void PropellerEngine::think(ForceAccumulator* pAccumulator) {
 	
 	//ask each propeller how much thrust they are providing, get direction from m_mainPropellerDirection and m_rudderPropellerDirection
 	newtons mainThrust = m_mainPropeller.getPropulsionStrength();
-	//Msg("%f", mainThrust);
 	newtons rudderThrust = m_rudderPropeller.getPropulsionStrength();
 	FVector mainDirection = m_mainPropellerDirection->GetActorForwardVector();
 	FVector rudderDirection = m_rudderPropellerDirection->GetActorForwardVector();
 	
-	//Msg("Rudder direction: %f, %f, %f", rudderDirection.X, rudderDirection.Y, rudderDirection.Z);
-
-
 	//makes the magnitude of main and rudder direction to be equal to the thrust, then sends the force to the force accumulator
 	mainDirection.Normalize();
 	mainDirection *= mainThrust;

@@ -13,7 +13,6 @@ AHotAirBalloon::AHotAirBalloon() {
 	m_pRudderController = NULL;
 	m_ForceAccumulator.m_propellerEngine.m_mainPropeller.m_pfAccum = &m_ForceAccumulator;
 	m_ForceAccumulator.m_propellerEngine.m_rudderPropeller.m_pfAccum = &m_ForceAccumulator;
-
 }
 
 #define max(a,b) ((a)<(b)?(b):(a))
@@ -39,11 +38,31 @@ void AHotAirBalloon::PostInit() {
 
 }
 
+// clamps a lerp value
+lerp clamp(lerp min, lerp val, lerp max) {
+	if (min < max) {
+		if (val < min) val = min;
+		if (val > max) val = max;
+	}
+	else { // max < min
+		if (val < max) val = max;
+		if (val > min) val = min;
+	}
+	return val;
+}
+
 //models the movement in response to forces
 void AHotAirBalloon::DefaultThink() {
+	if (m_pRudderController) {
+		// convert lerp to a [-1, 1] value
+		lerp lRotation = (clamp(0, m_pRudderController->GetLerpPosition(), 1) - 0.5) * 2;
+
+//		Msg("lerp is %f", lRotation);
+		SetActorRotation(FRotator(0, 180 * lRotation, 0));
+	}
+
 	m_ForceAccumulator.Think();
 	FVector acceleration = m_ForceAccumulator.getSummedForces() / GetMass();
-	//Msg(acceleration);
 	MoveThink(acceleration);
 }
 

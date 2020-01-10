@@ -57,8 +57,8 @@ void AHotAirBalloon::DefaultThink() {
 		// convert lerp to a [-1, 1] value
 		lerp lRotation = (clamp(0, m_pRudderController->GetLerpPosition(), 1) - 0.5) * 2;
 
-//		Msg("lerp is %f", lRotation);
-		SetActorRotation(FRotator(0, 180 * lRotation, 0));
+		FRotator rRotation = FRotator(0, 180 * lRotation, 0);
+		SetActorRotation(rRotation);
 	}
 
 	m_ForceAccumulator.Think();

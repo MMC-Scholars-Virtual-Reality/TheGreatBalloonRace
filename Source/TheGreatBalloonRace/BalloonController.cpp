@@ -2,20 +2,15 @@
 
 #include "BalloonController.h"
 #include "ABasePawn/ABasePawn.h"
-#include "System/NLogger.h"
+//#include "System/NLogger.h"
 
 ABalloonController::ABalloonController() {
 }
 
 void ABalloonController::OnButtonsChanged() {
-	if (m_iButtonsPressed & IN_BY) { // reset teleportation
-		// for some reason it must reset twice to reset correctly - fix this issue later
+	if (m_iButtonsPressed & IN_BY) { // reset location	
 		g_pBasePawn->TeleportPlayer(g_pBasePawn->getInitialLocation(), g_pBasePawn->getInitialRotation());
 		g_pBasePawn->TeleportPlayer(g_pBasePawn->getInitialLocation(), g_pBasePawn->getInitialRotation());
 	}
-//	else if (m_iButtonsPressed) {
-//		NLogger::Warning("buttons is %d", m_iButtonsPressed);
-//	}
-
 	Super::OnButtonsChanged();
 }

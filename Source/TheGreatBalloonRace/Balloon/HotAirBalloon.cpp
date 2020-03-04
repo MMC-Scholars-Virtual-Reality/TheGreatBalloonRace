@@ -1,6 +1,9 @@
 
 #include "HotAirBalloon.h"
 #include "System/NLogger.h"
+
+extern AHotAirBalloon* g_pHotAirBalloon = NULL;
+
 AHotAirBalloon::AHotAirBalloon() {
 	m_pBalloonMesh = CreateDefaultSubobject<UStaticMeshComponent>("m_BalloonMesh");
 	RootComponent = m_pBalloonMesh;
@@ -17,6 +20,8 @@ AHotAirBalloon::AHotAirBalloon() {
 
 #define max(a,b) ((a)<(b)?(b):(a))
 void AHotAirBalloon::PreInit() {
+	g_pHotAirBalloon = this;
+
 	m_velocity = FVector::ZeroVector; //sets velocity to 0
 	m_ForceAccumulator.m_burner.SetTemperature(m_flStartingBalloonTemperature);
 	//float startingEnergy = max(0.001f, m_flStartingBalloonEnergy);
@@ -85,6 +90,7 @@ void AHotAirBalloon::MoveThink(FVector acceleration) {
 	FVector dp = m_velocity * 100 * g_pGlobals->frametime;
 	AddActorWorldOffset(dp);
 
+	// balloon cannot fall below the ground
 	if (GetActorLocation().Z < 0) {
 		FVector loc = GetActorLocation();
 		loc.Z = 0;

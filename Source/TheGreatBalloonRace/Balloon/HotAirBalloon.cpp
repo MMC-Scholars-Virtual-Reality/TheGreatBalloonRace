@@ -57,7 +57,8 @@ void AHotAirBalloon::DefaultThink() {
 		// convert lerp to a [-1, 1] value
 		lerp lRotation = (clamp(0, m_pRudderController->GetLerpPosition(), 1) - 0.5) * 2;
 
-		FRotator rRotation = FRotator(0, 180 * lRotation, 0);
+		// convert lerp to rotation (up = left, down = right)
+		FRotator rRotation = FRotator(0, -180 * lRotation, 0);
 		SetActorRotation(rRotation);
 	}
 
@@ -82,7 +83,7 @@ void AHotAirBalloon::MoveThink(FVector acceleration) {
 	//calculate change in position
 	//our velocity is m/s, but Unreal world units are cm
 	FVector dp = m_velocity * 100 * g_pGlobals->frametime;
-	AddActorLocalOffset(dp);
+	AddActorWorldOffset(dp);
 
 	if (GetActorLocation().Z < 0) {
 		FVector loc = GetActorLocation();

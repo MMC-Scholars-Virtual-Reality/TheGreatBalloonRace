@@ -109,15 +109,15 @@ void PropellerEngine::think(ForceAccumulator* pAccumulator) {
 	
 	//ask each propeller how much thrust they are providing, get direction from m_mainPropellerDirection and m_rudderPropellerDirection
 	newtons mainThrust = m_mainPropeller.getPropulsionStrength();
-	newtons rudderThrust = m_rudderPropeller.getPropulsionStrength();
+	//newtons rudderThrust = m_rudderPropeller.getPropulsionStrength();
 	FVector mainDirection = m_mainPropellerDirection->GetActorForwardVector();
-	FVector rudderDirection = m_rudderPropellerDirection->GetActorForwardVector();
-	
+	//FVector rudderDirection = m_rudderPropellerDirection->GetActorForwardVector();
+
 	//makes the magnitude of main and rudder direction to be equal to the thrust, then sends the force to the force accumulator
 	mainDirection.Normalize();
 	mainDirection *= mainThrust;
-	rudderDirection.Normalize();
-	rudderDirection *= rudderThrust;
+	//rudderDirection.Normalize();
+	//rudderDirection *= rudderThrust;
 	pAccumulator->addForce(Force{Force::PROPULSION, mainDirection});
 }
 

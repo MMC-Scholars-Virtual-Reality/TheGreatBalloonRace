@@ -1,0 +1,3 @@
+[submodule "Source/TheGreatBalloonRace/VRBase"]
+	path = Source/TheGreatBalloonRace/VRBase
+	url = https://github.com/MMC-Scholars-Virtual-Reality/VRBase.git

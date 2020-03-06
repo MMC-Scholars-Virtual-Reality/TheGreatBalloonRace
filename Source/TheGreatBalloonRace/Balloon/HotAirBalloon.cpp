@@ -88,7 +88,7 @@ void AHotAirBalloon::MoveThink(FVector acceleration) {
 	//calculate change in position
 	//our velocity is m/s, but Unreal world units are cm
 	FVector dp = m_velocity * 100 * g_pGlobals->frametime;
-	AddActorWorldOffset(dp);
+	AddActorWorldOffset(dp, true); // sweep must be true for collision
 
 	// balloon cannot fall below the ground
 	if (GetActorLocation().Z < 0) {

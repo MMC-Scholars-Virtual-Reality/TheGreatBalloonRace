@@ -8,7 +8,11 @@ ABalloonController::ABalloonController() {
 }
 
 void ABalloonController::OnButtonsChanged() {
-	if (m_iButtonsPressed & IN_BY) { // reset location	
+	if (m_iButtonsPressed & IN_BY) { // reset location
+		// not entirely sure why this needs to be iterated twice but it will not be accurate otherwise
+
+		Msg("button clicked");
+		g_pBasePawn->TeleportPlayer(g_pHotAirBalloon->GetActorLocation(), g_pBasePawn->getInitialRotation());
 		g_pBasePawn->TeleportPlayer(g_pHotAirBalloon->GetActorLocation(), g_pBasePawn->getInitialRotation());
 	}
 	Super::OnButtonsChanged();

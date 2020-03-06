@@ -3,9 +3,6 @@
 .vs/
 .vscode/
 
-# starter content
-Content/StarterContent
-
 # generated files
 Binaries/
 DerivedDataCache/

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
+#include "PathRing.h"
 #include "TheGreatBalloonRaceGameModeBase.generated.h"
 
 /**
@@ -13,8 +14,9 @@ UCLASS()
 class THEGREATBALLOONRACE_API ATheGreatBalloonRaceGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
-	
-	
-	
+
+	public:
+
+		TArray<APathRing*> m_aPathRings;
 	
 };

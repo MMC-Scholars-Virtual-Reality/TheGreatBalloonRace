@@ -2,6 +2,7 @@
 
 #include "PathRing.h"
 #include "ABasePawn/ABasePawn.h"
+#include "TheGreatBalloonRaceGameModeBase.h"
 #include "System/NLogger.h"
 
 #define RING_MESH "StaticMesh'/Game/Models/Ring.Ring'"
@@ -28,11 +29,24 @@ APathRing::APathRing() {
 	m_bCollisionBox->OnComponentEndOverlap.AddDynamic(this, &APathRing::OnOverlapEnd);
 }
 
+void APathRing::PreInit() {
+	ATheGreatBalloonRaceGameModeBase* gameMode = GetWorld()->GetAuthGameMode<ATheGreatBalloonRaceGameModeBase>();
+	if(gameMode) gameMode->m_aPathRings.Push(this);
+}
+
 void APathRing::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr)) {
 		ABasePawn* pawn = Cast<ABasePawn>(OtherActor);
 		if (pawn) {
 			Msg("ring overlap with pawn");
+			ATheGreatBalloonRaceGameModeBase* gameMode = GetWorld()->GetAuthGameMode<ATheGreatBalloonRaceGameModeBase>();
+			if (gameMode->m_aPathRings.Num() == 1) {
+				Msg("game over");
+				//Victory screen
+			}
+			
+			gameMode->m_aPathRings.Remove(this);
+			this->DestroyEntity();
 		}
 	}
 }

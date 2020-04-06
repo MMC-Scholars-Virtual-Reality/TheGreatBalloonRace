@@ -18,5 +18,8 @@ class THEGREATBALLOONRACE_API ATheGreatBalloonRaceGameModeBase : public AGameMod
 	public:
 
 		TArray<APathRing*> m_aPathRings;
+		
+		UFUNCTION(BlueprintCallable)
+			void EndGame(bool playerWon);
 	
 };

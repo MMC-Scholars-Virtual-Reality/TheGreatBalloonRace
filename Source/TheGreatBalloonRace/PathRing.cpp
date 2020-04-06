@@ -2,8 +2,8 @@
 
 #include "PathRing.h"
 #include "ABasePawn/ABasePawn.h"
-#include "TheGreatBalloonRaceGameModeBase.h"
 #include "System/NLogger.h"
+#include "TheGreatBalloonRaceGameModeBase.h"
 
 #define RING_MESH "StaticMesh'/Game/Models/Ring.Ring'"
 
@@ -38,11 +38,10 @@ void APathRing::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Othe
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr)) {
 		ABasePawn* pawn = Cast<ABasePawn>(OtherActor);
 		if (pawn) {
-			Msg("ring overlap with pawn");
 			ATheGreatBalloonRaceGameModeBase* gameMode = GetWorld()->GetAuthGameMode<ATheGreatBalloonRaceGameModeBase>();
+			Msg("ring overlap with pawn");
 			if (gameMode->m_aPathRings.Num() == 1) {
-				Msg("game over");
-				//Victory screen
+				gameMode->EndGame(true);
 			}
 			
 			gameMode->m_aPathRings.Remove(this);

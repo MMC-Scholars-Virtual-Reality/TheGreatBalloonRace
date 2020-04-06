@@ -8,6 +8,7 @@
 #include "Components/BoxComponent.h"
 #include "PathRing.generated.h"
 
+
 UCLASS()
 class THEGREATBALLOONRACE_API APathRing : public ABaseEntity {
 	GENERATED_BODY()

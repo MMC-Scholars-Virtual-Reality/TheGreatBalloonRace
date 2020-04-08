@@ -7,7 +7,12 @@
 		{
 			"Name": "TheGreatBalloonRace",
 			"Type": "Runtime",
-			"LoadingPhase": "Default"
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Slate",
+				"SlateCore",
+				"UMG"
+			]
 		}
 	]
 }

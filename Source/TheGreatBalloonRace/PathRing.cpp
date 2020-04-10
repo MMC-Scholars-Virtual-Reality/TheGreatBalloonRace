@@ -29,9 +29,15 @@ APathRing::APathRing() {
 	m_bCollisionBox->OnComponentEndOverlap.AddDynamic(this, &APathRing::OnOverlapEnd);
 }
 
-void APathRing::PreInit() {
+
+
+void APathRing::BeginPlay() {
 	ATheGreatBalloonRaceGameModeBase* gameMode = GetWorld()->GetAuthGameMode<ATheGreatBalloonRaceGameModeBase>();
-	if(gameMode) gameMode->m_aPathRings.Push(this);
+	if (gameMode) {
+		gameMode->m_aPathRings.Push(this);
+		gameMode->m_iTimeLimit += g_iTimePerRing;
+	}
+	
 }
 
 void APathRing::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {

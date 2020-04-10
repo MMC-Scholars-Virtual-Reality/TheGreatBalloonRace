@@ -20,7 +20,6 @@ class THEGREATBALLOONRACE_API UTimer : public UUserWidget
 
 	UWorld* m_pGameWorld;
 	ATheGreatBalloonRaceGameModeBase* m_pGameMode;
-	int m_iTimeLimit = 75;
 
 public:
 

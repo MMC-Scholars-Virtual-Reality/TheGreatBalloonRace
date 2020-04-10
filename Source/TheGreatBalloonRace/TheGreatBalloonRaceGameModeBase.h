@@ -7,6 +7,9 @@
 #include "PathRing.h"
 #include "TheGreatBalloonRaceGameModeBase.generated.h"
 
+
+#define g_iTimePerRing 10
+
 /**
  * 
  */
@@ -18,8 +21,9 @@ class THEGREATBALLOONRACE_API ATheGreatBalloonRaceGameModeBase : public AGameMod
 	public:
 
 		TArray<APathRing*> m_aPathRings;
-		
+		int m_iTimeLimit;
+
 		UFUNCTION(BlueprintCallable)
-			void EndGame(bool playerWon);
+		void EndGame(bool playerWon);
 	
 };

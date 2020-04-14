@@ -9,7 +9,7 @@ FString UTimer::GetText() {
 		m_pGameMode = m_pGameWorld->GetAuthGameMode<ATheGreatBalloonRaceGameModeBase>();
 	}
 	int timeLeft = m_pGameMode->m_iTimeLimit - m_pGameWorld->GetTimeSeconds();
-	if (timeLeft <= 0 || m_pGameMode->m_aPathRings.Num() == 0) {
+	if ((m_pGameWorld->GetTimeSeconds() > 5) && ((timeLeft <= 0) || (m_pGameMode->m_aPathRings.Num() == 0))) {
 		m_pGameMode->EndGame(m_pGameMode->m_aPathRings.Num() == 0);
 	} 
 	else {

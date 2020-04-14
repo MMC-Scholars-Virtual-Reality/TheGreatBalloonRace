@@ -34,8 +34,8 @@ APathRing::APathRing() {
 void APathRing::BeginPlay() {
 	ATheGreatBalloonRaceGameModeBase* gameMode = GetWorld()->GetAuthGameMode<ATheGreatBalloonRaceGameModeBase>();
 	if (gameMode) {
-		gameMode->m_aPathRings.Push(this);
-		gameMode->m_iTimeLimit += g_iTimePerRing;
+		gameMode->m_aPathRings.AddUnique(this);
+		gameMode->UpdateTimeLimit();
 	}
 	
 }
@@ -51,7 +51,7 @@ void APathRing::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Othe
 			}
 			
 			gameMode->m_aPathRings.Remove(this);
-			this->DestroyEntity();
+			this->SetActorHiddenInGame(true);
 		}
 	}
 }

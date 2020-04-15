@@ -21,8 +21,12 @@ class THEGREATBALLOONRACE_API UTimer : public UUserWidget
 	UWorld* m_pGameWorld;
 	ATheGreatBalloonRaceGameModeBase* m_pGameMode;
 
+	int m_iTimeLeft;
+
 public:
 
 	UFUNCTION(BlueprintCallable)
 	FString GetText();
+	UFUNCTION(BlueprintCallable)
+	int GetTimeLeft();
 };

@@ -44,12 +44,7 @@ void APathRing::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Othe
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr)) {
 		ABasePawn* pawn = Cast<ABasePawn>(OtherActor);
 		if (pawn) {
-			ATheGreatBalloonRaceGameModeBase* gameMode = GetWorld()->GetAuthGameMode<ATheGreatBalloonRaceGameModeBase>();
-			Msg("ring overlap with pawn");
-			if (gameMode->m_aPathRings.Num() == 1) {
-				gameMode->EndGame(true);
-			}
-			
+			ATheGreatBalloonRaceGameModeBase* gameMode = GetWorld()->GetAuthGameMode<ATheGreatBalloonRaceGameModeBase>();			
 			gameMode->m_aPathRings.Remove(this);
 			this->SetActorHiddenInGame(true);
 		}

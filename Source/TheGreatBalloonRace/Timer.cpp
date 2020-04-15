@@ -8,13 +8,10 @@ FString UTimer::GetText() {
 		m_pGameWorld = GetWorld();
 		m_pGameMode = m_pGameWorld->GetAuthGameMode<ATheGreatBalloonRaceGameModeBase>();
 	}
-	int timeLeft = m_pGameMode->m_iTimeLimit - m_pGameWorld->GetTimeSeconds();
-	if ((m_pGameWorld->GetTimeSeconds() > 5) && ((timeLeft <= 0) || (m_pGameMode->m_aPathRings.Num() == 0))) {
-		m_pGameMode->EndGame(m_pGameMode->m_aPathRings.Num() == 0);
-	} 
-	else {
-		text.Append(SecondsToMSS(timeLeft));
-	}
+	m_iTimeLeft = m_pGameMode->m_iTimeLimit - m_pGameWorld->GetTimeSeconds();
+	
+	text.Append(SecondsToMSS(m_iTimeLeft));
+	
 	return text;
 }
 
@@ -32,4 +29,8 @@ FString UTimer::SecondsToMSS(int seconds) {
 	time.AppendInt(seconds);
 
 	return time;
+}
+
+int UTimer::GetTimeLeft() {
+	return m_iTimeLeft;
 }

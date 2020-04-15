@@ -22,7 +22,7 @@ class THEGREATBALLOONRACE_API ATheGreatBalloonRaceGameModeBase : public AGameMod
 		int m_iTimePerRing = 10;
 
 		void UpdateTimeLimit();
+
 		UFUNCTION(BlueprintCallable)
-		void EndGame(bool playerWon);
-	
+		int getNumPathRings();
 };

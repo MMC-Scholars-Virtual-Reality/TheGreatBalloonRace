@@ -10,7 +10,9 @@ FString UTimer::GetText() {
 	}
 	m_iTimeLeft = m_pGameMode->m_iTimeLimit - m_pGameWorld->GetTimeSeconds();
 	
-	text.Append(SecondsToMSS(m_iTimeLeft));
+	if ((m_iTimeLeft > 0) && (m_pGameMode->getNumPathRings() > 0)) {
+		text.Append(SecondsToMSS(m_iTimeLeft));
+	}
 	
 	return text;
 }

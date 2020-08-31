@@ -10,7 +10,6 @@ typedef float kilos;
 typedef float density; //kg/L
 typedef float therm_cond;
 #define min(a, b) ((a) < (b) ? a : b)
-#define sqr(a) ((a)*(a))
 #define gravity (9.81)
 #define euler (2.71828)
 #define MOLAR_MASS_AIR (0.002896) //kilos/mol

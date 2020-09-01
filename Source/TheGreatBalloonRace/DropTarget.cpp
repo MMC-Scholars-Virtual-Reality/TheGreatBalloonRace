@@ -19,7 +19,7 @@ ADropTarget::ADropTarget() {
 	RootComponent = m_pDropTargetMeshComponent;
 
 	// enable overlap
-	m_pDropTargetMeshComponent->bGenerateOverlapEvents = true;
+	m_pDropTargetMeshComponent->SetGenerateOverlapEvents(true);
 
 	m_pDropTargetMeshComponent->OnComponentBeginOverlap.AddDynamic(this, &ADropTarget::OnOverlapBegin);
 	m_pDropTargetMeshComponent->OnComponentEndOverlap.AddDynamic(this, &ADropTarget::OnOverlapEnd);

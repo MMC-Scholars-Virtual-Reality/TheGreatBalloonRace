@@ -24,7 +24,7 @@ APathRing::APathRing() {
 	FVector min, max;
 	m_pMeshComponent->GetLocalBounds(min, max);
 	m_bCollisionBox->SetBoxExtent((max - min) / 2);
-	m_bCollisionBox->bGenerateOverlapEvents = true;
+	m_bCollisionBox->SetGenerateOverlapEvents(true);
 	m_bCollisionBox->OnComponentBeginOverlap.AddDynamic(this, &APathRing::OnOverlapBegin);
 	m_bCollisionBox->OnComponentEndOverlap.AddDynamic(this, &APathRing::OnOverlapEnd);
 }

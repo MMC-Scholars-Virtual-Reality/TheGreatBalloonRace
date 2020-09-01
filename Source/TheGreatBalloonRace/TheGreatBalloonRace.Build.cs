@@ -8,6 +8,14 @@ public class TheGreatBalloonRace : ModuleRules
         PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "Slate", "SlateCore", "ProceduralMeshComponent" });
         PrivateDependencyModuleNames.AddRange(new string[] { "HeadMountedDisplay", "SteamVR" });
 
-        PublicIncludePaths.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "VRBase")));
+        PublicIncludePaths.AddRange(
+            new string[] 
+            {
+                Path.GetFullPath(Path.Combine(ModuleDirectory, "VRBase")),
+                Path.GetFullPath(ModuleDirectory)
+            }
+        );
+        
+        
     }
 }

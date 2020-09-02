@@ -8,7 +8,7 @@ public class TheGreatBalloonRaceEditorTarget : TargetRules
 	public TheGreatBalloonRaceEditorTarget(TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Editor;
-
-		ExtraModuleNames.AddRange( new string[] { "TheGreatBalloonRace" } );
+        DefaultBuildSettings = BuildSettingsVersion.V2;
+        ExtraModuleNames.AddRange( new string[] { "TheGreatBalloonRace" } );
 	}
 }

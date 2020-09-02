@@ -9,13 +9,11 @@ public class TheGreatBalloonRace : ModuleRules
         PrivateDependencyModuleNames.AddRange(new string[] { "HeadMountedDisplay", "SteamVR" });
 
         PublicIncludePaths.AddRange(
-            new string[] 
+            new string[]
             {
                 Path.GetFullPath(Path.Combine(ModuleDirectory, "VRBase")),
                 Path.GetFullPath(ModuleDirectory)
             }
         );
-        
-        
     }
 }
